@@ -14,8 +14,8 @@ function transitionElementText(element, newText) {
         }
         element.textContent = oldText;
         // Cycle the letters in the old text until they match
-        function cycleLetters(element, newText) {
-            const maxDelay = 30;
+        function cycleLetters(element, newText, totalDelay) {
+            const maxDelay = 500;
             let nErrors = 0;
             const currText = element.textContent;
             let rotatedText = '';
@@ -37,12 +37,15 @@ function transitionElementText(element, newText) {
                 rotatedText = rotatedText.concat(String.fromCharCode(charCode));
             }
             element.textContent = rotatedText;
-            const delay = Math.min(103 - Math.floor(100 * nErrors / newText.length), maxDelay);
-            if (element.textContent !== newText) {
-                setTimeout(function() {cycleLetters(element, newText)}, delay);
+            const delay = Math.min(103 - Math.floor(100 * nErrors / newText.length), 30);
+            totalDelay += delay;
+            if (element.textContent !== newText && totalDelay < maxDelay) {
+                setTimeout(function() {cycleLetters(element, newText, totalDelay)}, delay);
+            } else {
+                element.textContent = newText;
             }
         }
-        cycleLetters(element, newText);
+        cycleLetters(element, newText, 0);
     }
 }
 /**

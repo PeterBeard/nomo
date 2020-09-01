@@ -1,13 +1,4 @@
 /**
-  * Choose a random element from the given array
-  */
-function choose(list) {
-    const index = Math.floor(Math.random() * list.length);
-    return list[index];
-}
-
-
-/**
   * Add an ordinal suffix (-st, -nd, -rd, -th) to the given number
   */
 function getOrdinalSuffix(number) {

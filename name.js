@@ -155,29 +155,42 @@ function generateSurname(allowHyphenation) {
 
     let lastName = choose(lastNames);
     // Should we use a random noun to make up a name or use the one from the list?
-    if (Math.random() < 0.9) {
-        lastName = choose(nouns);
-        // Sometimes we add a suffix to lastName if it's a short noun
-        let suffixChance = 1.0 * (lastName.length > 8 ? 0.0 : 5.0 / lastName.length);
-        if (Math.random() < suffixChance) {
-            // Usually we use a generic suffix
-            let suffix = choose(suffixes);
-            let lastChar = lastName.charAt(lastName.length - 1);
-            if (lastChar === 's') {
-                lastName = lastName.substring(0, lastName.length - 1);
-                lastChar = lastName.charAt(lastName.length - 1);
+    switch(roll1D(10)) {
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+            lastName = choose(nouns);
+            // Sometimes we add a suffix to lastName if it's a short noun
+            let suffixChance = 1.0 * (lastName.length > 8 ? 0.0 : 5.0 / lastName.length);
+            if (Math.random() < suffixChance) {
+                // Usually we use a generic suffix
+                let suffix = choose(suffixes);
+                let lastChar = lastName.charAt(lastName.length - 1);
+                if (lastChar === 's') {
+                    lastName = lastName.substring(0, lastName.length - 1);
+                    lastChar = lastName.charAt(lastName.length - 1);
+                }
+                while (lastChar === suffix.charAt(0)) {
+                    suffix = choose(suffixes);
+                }
+                lastName += suffix;
             }
-            while (lastChar === suffix.charAt(0)) {
-                suffix = choose(suffixes);
+            // Prefixes can also be quite good
+            if (roll1D(10) === 1) {
+                lastName = choose(prefixes) + lastName;
             }
-            lastName += suffix;
-        }
-        // Prefixes can also be quite good
-        if (Math.random() < 0.1) {
-            lastName = choose(prefixes) + lastName;
-        }
+            break;
+        case 10:
+        default:
+            break;
     }
-    if (allowHyphenation && Math.random() < 0.1) {
+    if (allowHyphenation && roll1D(10) === 1) {
         lastName += '-' + generateSurname(false);
     }
     return lastName;
@@ -187,8 +200,6 @@ function generateSurname(allowHyphenation) {
  * Generate a random name and show it on the page
  */
 function generateName() {
-    let firstChoice = Math.floor(Math.random() * firstNames.length);
-    let firstName = firstNames[firstChoice];
     let lastName = generateSurname();
-    return firstName + ' ' + lastName;
+    return choose(firstNames) + ' ' + lastName;
 }

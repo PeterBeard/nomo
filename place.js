@@ -93,32 +93,44 @@ const streetTypes = [
   */
 function generateCity() {
     let cityName = choose(adjectives) + choose(citySuffixes);
-    if (Math.random() < 0.3) {
-        let separator = ' ';
-        if (Math.random() < 0.1) {
-            separator = '';
-        }
-        cityName = choose(colors) + separator + choose(animals);
-    } else if (Math.random() < 0.5) {
-        cityName = choose(nouns) + choose(citySuffixes);
-        if (Math.random() < 0.4) {
-            cityName += ' ' + choose(prepositions) + ' ' + choose(rivers);
-        }
-    } else if (Math.random() < 0.7) {
-        cityName = choose(placePrefixes) + ' ' + choose(nouns);
-        if (Math.random() < 0.2) {
-            cityName = choose(directions) + ' ' + cityName;
-        }
-    } else if (Math.random() < 0.8) {
-        cityName = 'Saint ' + choose(firstNames);
-    } else {
-        if (Math.random() < 0.2) {
-            // Add a direction to the city name
-            cityName = choose(directions) + ' ' + cityName;
-        } else if (Math.random() < 0.5) {
-            // Or add a comparative
-            cityName = choose(comparatives) + ' ' + cityName;
-        }
+    switch(roll1D(10)) {
+        case 1:
+        case 2:
+        case 3:
+            let separator = ' ';
+            if (roll1D(10) < 2) {
+                separator = '';
+            }
+            cityName = choose(colors) + separator + choose(animals);
+            break;
+        case 4:
+        case 5:
+            cityName = 'Saint ' + choose(firstNames);
+            break;
+        case 6:
+        case 7:
+        case 8:
+            cityName = choose(placePrefixes) + ' ' + choose(nouns);
+            if (roll1D(10) < 3) {
+                cityName = choose(directions) + ' ' + cityName;
+            }
+            break;
+        case 9:
+            if (roll1D(10) < 3) {
+                // Add a direction to the city name
+                cityName = choose(directions) + ' ' + cityName;
+            } else if (roll1D(4) < 3) {
+                // Or add a comparative
+                cityName = choose(comparatives) + ' ' + cityName;
+            }
+            break;
+        case 10:
+        default:
+            cityName = choose(nouns) + choose(citySuffixes);
+            if (roll1D(10) <= 4) {
+                cityName += ' ' + choose(prepositions) + ' ' + choose(rivers);
+            }
+            break;
     }
     return toTitleCase(cityName);
 }
@@ -129,12 +141,12 @@ function generateCity() {
   */
 function generateStreetName() {
     let streetName = choose(nouns) + ' ' + choose(streetTypes);
-    if (Math.random() < 0.2) {
+    if (roll1D(10) < 2) {
         // Use a random number for the street (e.g. 24th st)
         let number = Math.floor(Math.random() * 100);
         streetName = number + getOrdinalSuffix(number) + ' ' + choose(streetTypes);
     }
-    if (Math.random() < 0.25) {
+    if (roll1D(4) === 1) {
         streetName = choose(cardinalDirections) + ' ' + streetName;
     }
     return toTitleCase(streetName);
@@ -147,12 +159,12 @@ function generateStreetName() {
 function generateAddress() {
     const houseNumber = Math.ceil(Math.random() * 100);
     let streetAddress = houseNumber + ' ' + generateStreetName();
-    if (Math.random() < 0.3) {
+    if (roll1D(10) < 4) {
         // This is an apartment
         let apartmentNumber = Math.ceil(Math.random() * 1000) + 100;
-        if (Math.random() < 0.5) {
+        if (roll1D(4) < 3) {
             const letter = String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-            if (Math.random() < 0.5) {
+            if (roll1D(4) < 3) {
                 apartmentNumber = letter + '' + Math.ceil(Math.random() * 100);
             } else {
                 const sep = choose(['', ' ']);

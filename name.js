@@ -101,6 +101,7 @@ const nouns = [
     'Lumber',
     'Opposite',
     'Pepper',
+    'Pleasant',
     'Prose',
     'Quicksand',
     'Rainstorm',

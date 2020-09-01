@@ -6,6 +6,55 @@ function choose(list) {
     return list[index];
 }
 
+
+/**
+  * Add an ordinal suffix (-st, -nd, -rd, -th) to the given number
+  */
+function getOrdinalSuffix(number) {
+    const lastDigit = number % 10;
+    if (lastDigit === 1) {
+        return 'st';
+    } else if (lastDigit === 2) {
+        return 'nd';
+    } else if (lastDigit === 3) {
+        return 'rd';
+    } else {
+        return 'th';
+    }
+}
+
+/**
+  * Convert a string to title case by capitalizing the first letter of each word (e.g. "title case" -> "Title Case")
+  */
+function toTitleCase(string) {
+    function capitalize(word) {
+        return word.charAt(0).toUpperCase() + word.substring(1);
+    }
+
+    const lowerWords = [
+        'a',
+        'at',
+        'in',
+        'of',
+        'on',
+        'over',
+        'the',
+        'upon',
+        'with',
+    ];
+    const words = string.toLowerCase().split(' ');
+
+    let titleCaseString = capitalize(words[0]);
+    for (const word of words.slice(1)) {
+        if (lowerWords.indexOf(word) === -1) {
+            titleCaseString += ' ' + capitalize(word);
+        } else {
+            titleCaseString += ' ' + word;
+        }
+    }
+    return titleCaseString;
+}
+
 /**
  * Do a cool transition from an element's current text to some new text
  */
@@ -65,6 +114,12 @@ function generateIdentity() {
     const name = generateName();
     const nameEl = document.getElementById('name');
     transitionElementText(nameEl, name);
+
+    const address = generateAddress();
+    const streetAddress = abbreviateAddress(address[0]);
+    const city = address[1];
+    const state = address[2];
+    document.querySelector('#more-info p.address').textContent = streetAddress + ', ' + city + ', ' + state;
 }
 
 window.addEventListener('load', function() {

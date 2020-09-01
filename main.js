@@ -1,3 +1,150 @@
+const firstNames = [
+    'Alan',
+    'Aurelia',
+    'Barbara',
+    'Beatrice',
+    'Benedict',
+    'Bertrand',
+    'Charlotte',
+    'Cletus',
+    'Clifford',
+    'Dorothy',
+    'Dougal',
+    'Edward',
+    'Eleanor',
+    'Elliott',
+    'Emmanuel',
+    'Furnifold',
+    'Gertrude',
+    'Harriet',
+    'Haskell',
+    'Helen',
+    'Jean-Jacques',
+    'Jerome',
+    'Judith',
+    'Julia',
+    'Kelvin',
+    'Lisa',
+    'Margot',
+    'Martha',
+    'Mavis',
+    'Melvin',
+    'Nanette',
+    'Nathaniel',
+    'Nigel',
+    'Norton',
+    'Oliver',
+    'Ramona',
+    'Robert',
+    'Simon',
+    'Stephen',
+    'Steve',
+    'Timothy',
+    'Tobias',
+    'Wesley',
+    'Zenobia',
+    'Zelda',
+];
+const lastNames = [
+    'Borkenstein',
+    'Bumpass',
+    'Crambert',
+    'Danckwerts',
+    'Dumpleton',
+    'Dumweiner',
+    'Flasterstein',
+    'Lerpiss',
+    'Pepperdyne',
+    'Spreckels',
+    'Van der Woops',
+];
+const nouns = [
+    'Accent',
+    'Accident',
+    'Afterthought',
+    'Appliance',
+    'Basin',
+    'Bath',
+    'Bird',
+    'Birthday',
+    'Blanket',
+    'Bleach',
+    'Bludgeon',
+    'Broccoli',
+    'Building',
+    'Burger',
+    'Caption',
+    'Chandelier',
+    'Chardonnay',
+    'Cheese',
+    'Crayon',
+    'Cushion',
+    'Divorce',
+    'Egg',
+    'Festival',
+    'Friendship',
+    'Gargle',
+    'Government',
+    'Gradient',
+    'Hammock',
+    'Jellyfish',
+    'Lamp',
+    'Lighthouse',
+    'Loaf',
+    'Lumber',
+    'Opposite',
+    'Pepper',
+    'Prose',
+    'Quicksand',
+    'Rainstorm',
+    'Scissor',
+    'Shape',
+    'Sidetable',
+    'Snakes',
+    'Sofa',
+    'Squeak',
+    'Taste',
+    'Tomato',
+    'Toothpaste',
+    'Trains',
+    'Trousers',
+    'Vest',
+    'Volcano',
+    'Worm',
+    'Weasel',
+];
+const suffixes = [
+    'balls',
+    'face',
+    'fire',
+    'foot',
+    'gate',
+    'hammer',
+    'hands',
+    'meister',
+    'opoulos',
+    'ship',
+    'stein',
+    'storm',
+    'water',
+    'winkle',
+    'wood',
+];
+const prefixes = [
+    'Ben-',
+    'Mc',
+    'von ',
+    'Ó\'',
+];
+
+/**
+  * Choose a random element from the given array
+  */
+function choose(list) {
+    const index = Math.floor(Math.random() * list.length);
+    return list[index];
+}
+
 /**
  * Do a cool transition from an element's current text to some new text
  */
@@ -48,116 +195,52 @@ function transitionElementText(element, newText) {
         cycleLetters(element, newText, 0);
     }
 }
+
+/**
+ * Generate a random surname
+ */
+function generateSurname(allowHyphenation) {
+    if (allowHyphenation === undefined) {
+        allowHyphenation = true;
+    }
+
+    let lastName = choose(lastNames);
+    // Should we use a random noun to make up a name or use the one from the list?
+    if (Math.random() < 0.9) {
+        lastName = choose(nouns);
+        // Sometimes we add a suffix to lastName if it's a short noun
+        let suffixChance = 1.0 * (lastName.length > 8 ? 0.0 : 5.0 / lastName.length);
+        if (Math.random() < suffixChance) {
+            // Usually we use a generic suffix
+            let suffix = choose(suffixes);
+            let lastChar = lastName.charAt(lastName.length - 1);
+            if (lastChar === 's') {
+                lastName = lastName.substring(0, lastName.length - 1);
+                lastChar = lastName.charAt(lastName.length - 1);
+            }
+            while (lastChar === suffix.charAt(0)) {
+                suffix = choose(suffixes);
+            }
+            lastName += suffix;
+        }
+        // Prefixes can also be quite good
+        if (Math.random() < 0.1) {
+            lastName = choose(prefixes) + lastName;
+        }
+    }
+    if (allowHyphenation && Math.random() < 0.1) {
+        lastName += '-' + generateSurname(false);
+    }
+    return lastName;
+}
+
 /**
  * Generate a random name and show it on the page
  */
 function generateName() {
-    const firstNames = [
-        'Aurelia',
-        'Barbara',
-        'Beatrice',
-        'Benedict',
-        'Bertrand',
-        'Charlotte',
-        'Clifford',
-        'Eleanor',
-        'Elliott',
-        'Furnifold',
-        'Harriet',
-        'Haskell',
-        'Helen',
-        'Jerome',
-        'Judith',
-        'Julia',
-        'Kelvin',
-        'Lisa',
-        'Margot',
-        'Mavis',
-        'Melvin',
-        'Nanette',
-        'Norton',
-        'Oliver',
-        'Ramona',
-        'Robert',
-        'Simon',
-        'Steve',
-        'Tobias',
-        'Zenobia',
-    ];
-    const lastNames = [
-        'Birdwater',
-        'Borkenstein',
-        'Bumpass',
-        'Burgermeister',
-        'Cheesewinkle',
-        'Crambert',
-        'Danckwerts',
-        'Dumpleton',
-        'Dumweiner',
-        'Flasterstein',
-        'Gargleman',
-        'Lerpiss',
-        'Pepperdyne',
-        'Spreckels',
-        'Van der Woops',
-    ];
-    const nouns = [
-        'Accent',
-        'Accident',
-        'Afterthought',
-        'Appliance',
-        'Basin',
-        'Bird',
-        'Blanket',
-        'Bleach',
-        'Broccoli',
-        'Building',
-        'Caption',
-        'Chandelier',
-        'Crayon',
-        'Cushion',
-        'Divorce',
-        'Egg',
-        'Festival',
-        'Gradient',
-        'Hammock',
-        'Lighthouse',
-        'Loaf',
-        'Lumber',
-        'Number',
-        'Opposite',
-        'Prose',
-        'Quicksand',
-        'Rainstorm',
-        'Shape',
-        'Sidetable',
-        'Snakes',
-        'Sofa',
-        'Squeak',
-        'Taste',
-        'Tomatoes',
-        'Toothpaste',
-        'Trains',
-        'Trousers',
-        'Vest',
-        'Volcano',
-    ];
     let firstChoice = Math.floor(Math.random() * firstNames.length);
-    let lastChoice = Math.floor(Math.random() * lastNames.length);
     let firstName = firstNames[firstChoice];
-    let lastName = lastNames[lastChoice];
-
-    // Decide whether or not to use a random noun for one of the names
-    if (Math.random() < 0.9) {
-        // Prefer to change the last name
-        if (Math.random() < 0.8) {
-            lastChoice = Math.floor(Math.random() * nouns.length);
-            lastName = nouns[lastChoice];
-        } else {
-            firstChoice = Math.floor(Math.random() * nouns.length);
-            firstName = nouns[firstChoice];
-        }
-    }
+    let lastName = generateSurname();
     const nameEl = document.getElementById('name');
     transitionElementText(nameEl, firstName + ' ' + lastName);
 }

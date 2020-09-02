@@ -180,12 +180,15 @@ function generateIdentity() {
     const idNumber = String.fromCharCode(Math.random() * 26 + 65) + Math.ceil(Math.random() * 1000000000000);
     document.querySelector('#identity .id-number').textContent = idNumber;
 
-    if (roll1D(10) === 1) {
+    if (roll1D(10) < 4) {
         const endorsement = choose([
             'HAZARD TO OTHER MOTORISTS',
             'SAFE DRIVER',
             'VOID',
             'PROVISIONAL LICENSE',
+            'DO NOT FEED',
+            'DO NOT LOOK DIRECTLY INTO EYES',
+            'SERIAL COMPLAINER',
         ]);
         document.querySelector('#identity .endorsements').textContent = endorsement;
     } else {

@@ -24,7 +24,7 @@ function roll(n, m) {
   * Roll a single die with m sides
   */
 function roll1D(m) {
-    return Math.ceil(Math.random() * m);
+    return Math.floor(Math.random() * m) + 1;
 }
 
 /**

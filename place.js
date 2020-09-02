@@ -5,6 +5,7 @@
 const citySuffixes = [
     'borough',
     'bottom',
+    'burg',
     'chester',
     'falls',
     'ford',
@@ -12,6 +13,7 @@ const citySuffixes = [
     'hole',
     'land',
     'minster',
+    'town',
     'vale',
     'ville',
 ];
@@ -48,6 +50,7 @@ const animals = [
     'beaver',
     'dog',
     'fox',
+    'goose',
     'possum',
     'turkey',
     'weasel',
@@ -63,22 +66,18 @@ const directions = cardinalDirections.concat([
     'middle',
     'upper',
 ]);
-const prepositions = [
-    'in the',
-    'on the',
-    'on',
-    'over',
-    'upon',
-];
-const rivers = [
-    'avon',
-    'mimms',
-    'rinse',
-    'wet',
-];
 const placePrefixes = [
     'lake',
     'mount',
+];
+const placeSuffixes = [
+    'bay',
+    'hill',
+    'meadow',
+    'mountain',
+    'point',
+    'rock',
+    'valley',
 ];
 const streetTypes = [
     'avenue',
@@ -95,6 +94,8 @@ function generateCity() {
     let cityName = choose(adjectives) + choose(citySuffixes);
     switch(roll1D(10)) {
         case 1:
+            cityName = choose(animals) + ' ' + choose(placeSuffixes);
+            break;
         case 2:
         case 3:
             let separator = ' ';
@@ -110,7 +111,11 @@ function generateCity() {
         case 6:
         case 7:
         case 8:
-            cityName = choose(placePrefixes) + ' ' + choose(nouns);
+            if (roll1D(2) === 1) {
+                cityName = choose(placePrefixes) + ' ' + choose(nouns);
+            } else {
+                cityName = choose(nouns) + ' ' + choose(placeSuffixes);
+            }
             if (roll1D(10) < 3) {
                 cityName = choose(directions) + ' ' + cityName;
             }
@@ -127,12 +132,18 @@ function generateCity() {
         case 10:
         default:
             cityName = choose(nouns) + choose(citySuffixes);
-            if (roll1D(10) <= 4) {
-                cityName += ' ' + choose(prepositions) + ' ' + choose(rivers);
-            }
             break;
     }
     return toTitleCase(cityName);
+}
+
+
+/**
+  * Generate a random US state abbreviation
+  */
+function generateState() {
+    let abbreviation = String.fromCharCode(Math.random() * 26 + 65) + String.fromCharCode(Math.random() * 26 + 65);
+    return abbreviation.toUpperCase();
 }
 
 
@@ -174,10 +185,13 @@ function generateAddress() {
         streetAddress += ' apartment ' + apartmentNumber;
     }
     let city = generateCity();
+    let state = generateState();
+    let zipCode = Math.floor(Math.random() * 90000) + 10000;
     return [
         toTitleCase(streetAddress),
         city,
-        choose(['CA', 'MN', 'MI']),
+        state,
+        zipCode,
     ];
 }
 

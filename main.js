@@ -168,7 +168,7 @@ function generateIdentity() {
 
     const dlDates = generateIssuedExpirationDates();
     function formatDate(date) {
-        let month = date.getMonth();
+        let month = date.getMonth() + 1;
         if (month < 10) {
             month = '0' + month;
         }

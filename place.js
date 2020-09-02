@@ -86,6 +86,17 @@ const streetTypes = [
     'street',
     'way',
 ];
+const statePrefixes = cardinalDirections.concat([
+    'new',
+    'old',
+]);
+const stateSuffixes = [
+    'fornia',
+    'klahoma',
+    'shire',
+    'sota',
+    'sylvania',
+];
 
 /**
   * Generate a random city name
@@ -142,8 +153,11 @@ function generateCity() {
   * Generate a random US state abbreviation
   */
 function generateState() {
-    let abbreviation = String.fromCharCode(Math.random() * 26 + 65) + String.fromCharCode(Math.random() * 26 + 65);
-    return abbreviation.toUpperCase();
+    let stateName = choose(nouns) + choose(stateSuffixes);
+    if (roll1D(4) === 1) {
+        stateName = choose(statePrefixes) + ' ' + stateName;
+    }
+    return toTitleCase(stateName);
 }
 
 
@@ -161,6 +175,21 @@ function generateStreetName() {
         streetName = choose(cardinalDirections) + ' ' + streetName;
     }
     return toTitleCase(streetName);
+}
+
+
+/**
+  * Pick a reasonable abbreviation for the given state name
+  */
+function abbreviateState(stateName) {
+    let abbr = null;
+    if (stateName.indexOf(' ') !== -1) {
+        const words = stateName.split(' ');
+        abbr = words[0].charAt(0) + words[1].charAt(0)
+    } else {
+        abbr = stateName.charAt(0) + stateName.charAt(stateName.length - 1);
+    }
+    return abbr.toUpperCase();
 }
 
 

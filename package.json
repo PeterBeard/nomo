@@ -1,0 +1,16 @@
+{
+    "name": "nomo",
+    "version": "0.1.0",
+    "description": "The normal human name generator",
+    "main": "bin/index.js",
+    "scripts": {},
+    "type": "module",
+    "keywords": [],
+    "author": "Peter Beard (https://www.peterbeard.co)",
+    "bin": {
+        "nomo": "./index.js"
+    },
+    "dependencies": {
+        "commander": "^6.2.1"
+    }
+}

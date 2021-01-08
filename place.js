@@ -1,7 +1,53 @@
 /*
  *  Variables and functions related to generating place names
  */
-
+const cityNouns = [
+    'Accent',
+    'Accident',
+    'Afterthought',
+    'Appliance',
+    'Bath',
+    'Birthday',
+    'Blanket',
+    'Bleach',
+    'Bludgeon',
+    'Broccoli',
+    'Bucket',
+    'Building',
+    'Burger',
+    'Chandelier',
+    'Chardonnay',
+    'Cheese',
+    'Crayon',
+    'Cushion',
+    'Egg',
+    'Festival',
+    'Friendship',
+    'Gargle',
+    'Hammock',
+    'Jellyfish',
+    'Lamp',
+    'Lighthouse',
+    'Loaf',
+    'Opposite',
+    'Pepper',
+    'Pleasant',
+    'Prose',
+    'Quicksand',
+    'Rainstorm',
+    'Sidetable',
+    'Sofa',
+    'Squeak',
+    'Stink',
+    'Taste',
+    'Tomato',
+    'Toothpaste',
+    'Trains',
+    'Trousers',
+    'Vest',
+    'Volcano',
+    'Weasel',
+];
 const citySuffixes = [
     'borough',
     'bottom',
@@ -48,12 +94,14 @@ const colors = [
 const animals = [
     'bear',
     'beaver',
+    'bird',
     'dog',
     'fox',
     'goose',
     'possum',
     'turkey',
     'weasel',
+    'worm',
 ];
 const cardinalDirections = [
     'east',
@@ -78,10 +126,12 @@ const placeSuffixes = [
     'point',
     'rock',
     'valley',
+    'woods',
 ];
 const streetTypes = [
     'avenue',
     'boulevard',
+    'crescent',
     'road',
     'street',
     'way',
@@ -123,9 +173,9 @@ function generateCity() {
         case 7:
         case 8:
             if (roll1D(2) === 1) {
-                cityName = choose(placePrefixes) + ' ' + choose(nouns);
+                cityName = choose(placePrefixes) + ' ' + choose(cityNouns);
             } else {
-                cityName = choose(nouns) + ' ' + choose(placeSuffixes);
+                cityName = choose(cityNouns) + ' ' + choose(placeSuffixes);
             }
             if (roll1D(10) < 3) {
                 cityName = choose(directions) + ' ' + cityName;
@@ -142,7 +192,7 @@ function generateCity() {
             break;
         case 10:
         default:
-            cityName = choose(nouns) + choose(citySuffixes);
+            cityName = choose(cityNouns) + choose(citySuffixes);
             break;
     }
     return toTitleCase(cityName);

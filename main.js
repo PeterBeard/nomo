@@ -195,12 +195,8 @@ function generateIdentity() {
         document.querySelector('#identity .endorsements').textContent = '';
     }
 
-    const photo = generatePhoto();
-    photo.onload = function() {
-        const photoCanvas = document.querySelector('canvas.photo');
-        const context = photoCanvas.getContext('2d');
-        context.drawImage(photo, 0, 0, photoCanvas.width, photoCanvas.height);
-    }
+    const photoContainer = document.querySelector('div.photo');
+    generatePhoto(photoContainer);
 }
 
 window.addEventListener('load', function() {

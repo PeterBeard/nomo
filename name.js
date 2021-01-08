@@ -1,3 +1,4 @@
+import {choose, roll1D} from './random.js'
 /*
  *  Variables and functions related to generating names for people
  */
@@ -206,3 +207,5 @@ function generateName() {
     let lastName = generateSurname();
     return choose(firstNames) + ' ' + lastName;
 }
+
+export {firstNames, generateName, nouns};

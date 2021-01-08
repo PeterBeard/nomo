@@ -33,3 +33,5 @@ function roll1D(m) {
 function rollAndSum(n, m) {
     return roll(n, m).reduce((s, v) => s + v);
 }
+
+export {choose, roll1D, rollAndSum};

@@ -1,3 +1,7 @@
+import {choose, roll1D} from './random.js';
+import {firstNames, nouns} from './name.js';
+import {getOrdinalSuffix, toTitleCase} from './strings.js';
+
 /*
  *  Variables and functions related to generating place names
  */
@@ -229,21 +233,6 @@ function generateStreetName() {
 
 
 /**
-  * Pick a reasonable abbreviation for the given state name
-  */
-function abbreviateState(stateName) {
-    let abbr = null;
-    if (stateName.indexOf(' ') !== -1) {
-        const words = stateName.split(' ');
-        abbr = words[0].charAt(0) + words[1].charAt(0)
-    } else {
-        abbr = stateName.charAt(0) + stateName.charAt(stateName.length - 1);
-    }
-    return abbr.toUpperCase();
-}
-
-
-/**
   * Generate a full street address (e.g. 123 Main Street, Anytown, USA 99999)
   */
 function generateAddress() {
@@ -274,26 +263,4 @@ function generateAddress() {
     ];
 }
 
-/**
-  * Abbreviate the given address string (e.g. "14 Some Street Apartment 441" -> "13 Some St. Apt. 441")
-  */
-function abbreviateAddress(address) {
-    const replacements = [
-        [/\bApartment\b/, 'Apt'],
-        [/\bAvenue\b/, 'Ave'],
-        [/\bBoulevard\b/, 'Blvd'],
-        [/\bEast\b/, 'E'],
-        [/\bNorth\b/, 'N'],
-        [/\bRoad\b/, 'Rd'],
-        [/\bSouth\b/, 'S'],
-        [/\bStreet\b/, 'St'],
-        [/\bWest\b/, 'W'],
-    ];
-    for (const repl of replacements) {
-        address = address.replace(
-            repl[0],
-            repl[1] + '.',
-        );
-    }
-    return address;
-}
+export {generateAddress};

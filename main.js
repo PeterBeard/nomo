@@ -1,50 +1,8 @@
-/**
-  * Add an ordinal suffix (-st, -nd, -rd, -th) to the given number
-  */
-function getOrdinalSuffix(number) {
-    const lastDigit = number % 10;
-    if (lastDigit === 1) {
-        return 'st';
-    } else if (lastDigit === 2) {
-        return 'nd';
-    } else if (lastDigit === 3) {
-        return 'rd';
-    } else {
-        return 'th';
-    }
-}
-
-/**
-  * Convert a string to title case by capitalizing the first letter of each word (e.g. "title case" -> "Title Case")
-  */
-function toTitleCase(string) {
-    function capitalize(word) {
-        return word.charAt(0).toUpperCase() + word.substring(1);
-    }
-
-    const lowerWords = [
-        'a',
-        'at',
-        'in',
-        'of',
-        'on',
-        'over',
-        'the',
-        'upon',
-        'with',
-    ];
-    const words = string.toLowerCase().split(' ');
-
-    let titleCaseString = capitalize(words[0]);
-    for (const word of words.slice(1)) {
-        if (lowerWords.indexOf(word) === -1) {
-            titleCaseString += ' ' + capitalize(word);
-        } else {
-            titleCaseString += ' ' + word;
-        }
-    }
-    return titleCaseString;
-}
+import { generateName } from './name.js';
+import { generateAddress } from './place.js';
+import { abbreviateAddress, abbreviateState, toTitleCase } from './strings.js';
+import { generateBirthday, generateEyeColor, generateHeightIn, generatePhoto, generateSex, generateWeightLb } from './person.js';
+import { choose, roll1D } from './random.js';
 
 /**
   * Convert a number of inches to feet and inches

@@ -1,3 +1,5 @@
+import {choose, roll1D, rollAndSum} from './random.js';
+
 /*
  * Functions for generating an entire person
  */
@@ -213,3 +215,12 @@ function generatePhoto(containerEl) {
         context.drawImage(hairImage, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     };
 }
+
+export {
+    generateBirthday,
+    generateEyeColor,
+    generateHeightIn,
+    generatePhoto,
+    generateSex,
+    generateWeightLb,
+};

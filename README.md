@@ -1,6 +1,6 @@
 # Nomo
 
-HTML tool for generating normal human names.
+JavaScript/HTML tool for generating normal human names.
 
 ## Command-line interface
 

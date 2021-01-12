@@ -265,7 +265,7 @@ function generateSurname(allowHyphenation) {
         case 9:
             lastName = choose(nouns);
             // Sometimes we add a suffix to lastName if it's a short noun
-            let suffixChance = 1.0 * (lastName.length > 8 ? 0.0 : 5.0 / lastName.length);
+            let suffixChance = 1.0 * (lastName.length > 10 ? 0.0 : 5.0 / lastName.length);
             if (Math.random() < suffixChance) {
                 // Usually we use a generic suffix
                 let suffix = choose(suffixes);

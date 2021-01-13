@@ -25,6 +25,7 @@ const cityNouns = [
     'Cheese',
     'Crayon',
     'Cushion',
+    'Echo',
     'Egg',
     'Festival',
     'Friendship',
@@ -34,6 +35,7 @@ const cityNouns = [
     'Lamp',
     'Lighthouse',
     'Loaf',
+    'Market',
     'Opposite',
     'Pepper',
     'Pleasant',
@@ -51,22 +53,46 @@ const cityNouns = [
     'Trousers',
     'Vest',
     'Volcano',
+    'Water',
     'Weasel',
 ];
 const citySuffixes = [
+    'adelphia',
+    'apolis',
+    'boro',
     'borough',
     'bottom',
     'burg',
     'chester',
+    'croft',
+    'dale',
     'falls',
+    'foot',
     'ford',
     'hill',
     'hole',
+    'horn',
+    'hurst',
     'land',
     'minster',
+    'port',
+    'ton',
     'town',
     'vale',
     'ville',
+];
+const cityTypes = [
+    'center',
+    'city',
+    'crossing',
+    'ferry',
+    'harbor',
+    'heights',
+    'junction',
+    'manor',
+    'park',
+    'village',
+    'vista',
 ];
 const cardinalDirections = [
     'east',
@@ -75,13 +101,17 @@ const cardinalDirections = [
     'west',
 ];
 const directions = cardinalDirections.concat([
+    'inner',
     'lower',
     'middle',
+    'outer',
     'upper',
 ]);
 const placePrefixes = [
+    'fort',
     'lake',
     'mount',
+    'port',
 ];
 const streetTypes = [
     'avenue',
@@ -108,21 +138,25 @@ const stateSuffixes = [
   */
 function generateCity() {
     let cityName = choose(adjectives) + choose(citySuffixes);
-    switch(roll1D(10)) {
+    switch(roll1D(12)) {
         case 1:
+        case 2:
             cityName = choose(animals) + ' ' + choose(naturalFeatures);
             break;
-        case 2:
         case 3:
+        case 4:
             let separator = ' ';
             if (roll1D(10) < 2) {
                 separator = '';
             }
             cityName = choose(colors) + separator + choose(animals);
             break;
-        case 4:
         case 5:
-            cityName = 'Saint ' + choose(firstNames);
+            if (roll1D(2) < 2) {
+                cityName = choose(firstNames) + '\'s Hope';
+            } else {
+                cityName = 'Saint ' + choose(firstNames);
+            }
             break;
         case 6:
         case 7:
@@ -146,6 +180,10 @@ function generateCity() {
             }
             break;
         case 10:
+        case 11:
+            cityName = choose(cityNouns) + ' ' + choose(cityTypes);
+            break;
+        case 12:
         default:
             cityName = choose(cityNouns) + choose(citySuffixes);
             break;

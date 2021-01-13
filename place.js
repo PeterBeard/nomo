@@ -1,5 +1,6 @@
 import {choose, roll1D} from './random.js';
-import {firstNames, nouns} from './name.js';
+import {firstNames} from './name.js';
+import {adjectives, animals, comparatives, colors, naturalFeatures, nouns} from './words.js';
 import {getOrdinalSuffix, toTitleCase} from './strings.js';
 
 /*
@@ -67,46 +68,6 @@ const citySuffixes = [
     'vale',
     'ville',
 ];
-const comparatives = [
-    'greater',
-    'inner',
-    'lesser',
-    'outer',
-];
-const adjectives = [
-    'big',
-    'little',
-    'nice',
-    'sad',
-    'small',
-    'tiny',
-    'great',
-];
-const colors = [
-    'blue',
-    'cyan',
-    'green',
-    'mauve',
-    'orange',
-    'puce',
-    'purple',
-    'red',
-    'teal',
-    'violet',
-    'yellow',
-];
-const animals = [
-    'bear',
-    'beaver',
-    'bird',
-    'dog',
-    'fox',
-    'goose',
-    'possum',
-    'turkey',
-    'weasel',
-    'worm',
-];
 const cardinalDirections = [
     'east',
     'north',
@@ -121,16 +82,6 @@ const directions = cardinalDirections.concat([
 const placePrefixes = [
     'lake',
     'mount',
-];
-const placeSuffixes = [
-    'bay',
-    'hill',
-    'meadow',
-    'mountain',
-    'point',
-    'rock',
-    'valley',
-    'woods',
 ];
 const streetTypes = [
     'avenue',
@@ -159,7 +110,7 @@ function generateCity() {
     let cityName = choose(adjectives) + choose(citySuffixes);
     switch(roll1D(10)) {
         case 1:
-            cityName = choose(animals) + ' ' + choose(placeSuffixes);
+            cityName = choose(animals) + ' ' + choose(naturalFeatures);
             break;
         case 2:
         case 3:
@@ -179,7 +130,7 @@ function generateCity() {
             if (roll1D(2) === 1) {
                 cityName = choose(placePrefixes) + ' ' + choose(cityNouns);
             } else {
-                cityName = choose(cityNouns) + ' ' + choose(placeSuffixes);
+                cityName = choose(cityNouns) + ' ' + choose(naturalFeatures);
             }
             if (roll1D(10) < 3) {
                 cityName = choose(directions) + ' ' + cityName;
@@ -204,10 +155,10 @@ function generateCity() {
 
 
 /**
-  * Generate a random US state abbreviation
+  * Generate a word that sounds like a US state
   */
 function generateState() {
-    let stateName = choose(nouns) + choose(stateSuffixes);
+    let stateName = choose(nouns.concat(adjectives)) + choose(stateSuffixes);
     if (roll1D(4) === 1) {
         stateName = choose(statePrefixes) + ' ' + stateName;
     }
@@ -219,7 +170,7 @@ function generateState() {
   * Generate a random street name (e.g. "South Bucket Street")
   */
 function generateStreetName() {
-    let streetName = choose(nouns) + ' ' + choose(streetTypes);
+    let streetName = choose(nouns.concat(adjectives)) + ' ' + choose(streetTypes);
     if (roll1D(10) < 2) {
         // Use a random number for the street (e.g. 24th st)
         let number = Math.floor(Math.random() * 100);

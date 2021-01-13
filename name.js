@@ -1,4 +1,5 @@
-import {choose, roll1D} from './random.js'
+import {choose, roll1D} from './random.js';
+import {adjectives, nouns} from './words.js';
 /*
  *  Variables and functions related to generating names for people
  */
@@ -66,104 +67,7 @@ const lastNames = [
     'Spreckels',
     'Van der Woops',
 ];
-/* suggest renaming because i added things that are not nouns */
-const nouns = [
-    'Accent',
-    'Accident',
-    'Afterthought',
-    'Appliance',
-    'Basin',
-    'Bath',
-    'Bird',
-    'Birthday',
-    'Blanket',
-    'Bleach',
-    'Bludgeon',
-    'Broccoli',
-    'Bucket',
-    'Building',
-    'Burger',
-    'Caption',
-    'Chandelier',
-    'Chardonnay',
-    'Cheese',
-    'Crayon',
-    'Cushion',
-    'Divorce',
-    'Dripp',
-    'Egg',
-    'Festival',
-    'Friendship',
-    'Gargle',
-    'Government',
-    'Gradient',
-    'Hammock',
-    'Jellyfish',
-    'Lamp',
-    'Lighthouse',
-    'Loaf',
-    'Lumber',
-    'Opposite',
-    'Pepper',
-    'Pleasant',
-    'Prose',
-    'Quicksand',
-    'Rainstorm',
-    'Scissor',
-    'Shape',
-    'Sidetable',
-    'Snakes',
-    'Sofa',
-    'Squeak',
-    'Stink',
-    'Taste',
-    'Tomato',
-    'Toothpaste',
-    'Trains',
-    'Trousers',
-    'Vest',
-    'Volcano',
-    'Worm',
-    'Weasel',
-    
-    /* nouns added from Rachel's list */
-    'Autumn',
-    'Berry',
-    'Bird',
-    'Day',
-    'Dragon',
-    'Dream',
-    'Evening',
-    'Free',
-    'Frost',
-    'Honey',
-    'Humble',
-    'Leather',
-    'Meadow',
-    'Moon',
-    'Morning',
-    'Night',
-    'Ocean',
-    'Peach',
-    'Rain',
-    'Salt',
-    'Shadow',
-    'Spark',
-    'Spider',
-    'Spring',
-    'Sugar',
-    'Summer',
-    'Velvet',
-    'Winter',
-    'Witch',
-    'Wonder',
-    
-    /* non-nouns added from Rachel's list */
-    'Gentle',
-    'Lone',
-    'Pale',
-    'Sweet',
-];
+
 const suffixes = [
     'balls',
     'face',
@@ -263,8 +167,8 @@ function generateSurname(allowHyphenation) {
         case 7:
         case 8:
         case 9:
-            lastName = choose(nouns);
-            // Sometimes we add a suffix to lastName if it's a short noun
+            lastName = choose(nouns.concat(adjectives));
+            // Sometimes we add a suffix to lastName if it's short
             let suffixChance = 1.0 * (lastName.length > 10 ? 0.0 : 5.0 / lastName.length);
             if (Math.random() < suffixChance) {
                 // Usually we use a generic suffix
@@ -302,4 +206,4 @@ function generateName() {
     return choose(firstNames) + ' ' + lastName;
 }
 
-export {firstNames, generateName, nouns};
+export {firstNames, generateName};

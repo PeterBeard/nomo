@@ -6,6 +6,18 @@ function choose(list) {
     return list[index];
 }
 
+
+/**
+  * Generate a random integer in the range [n, m) - default value of n is zero
+  */
+function randRange(n, m) {
+    if (m !== undefined) {
+        return n + Math.floor(Math.random() * (m - n));
+    } else {
+        return Math.floor(Math.random() * n);
+    }
+}
+
 /**
   * Roll n dice with m sides each (e.g. roll(1, 6) rolls 1d6, roll(2, 20) rolls 2d20, etc.) and return the numbers rolled
   */
@@ -34,4 +46,4 @@ function rollAndSum(n, m) {
     return roll(n, m).reduce((s, v) => s + v);
 }
 
-export {choose, roll1D, rollAndSum};
+export {choose, randRange, roll1D, rollAndSum};

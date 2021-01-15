@@ -1,4 +1,5 @@
-import {randRange} from './random.js';
+import {choose, randRange, rollAndSum, roll1D} from './random.js';
+import {reverse} from './strings.js';
 /*
  * Functions for generating a person's contact information
  */
@@ -29,4 +30,70 @@ function generatePhone() {
     return `+1${areaCode}${exchangeCode}${lineNumber}`;
 }
 
-export {generatePhone};
+
+/**
+  * Generate an email address
+  */
+function generateEmail(name, birthday) {
+    const domains = [
+        'coolmail.com',
+        'e.mail',
+        'fmail.com',
+        'wowee.com',
+    ];
+    const sports = [
+        'basketball',
+        'football',
+        'hockey',
+        'soccer',
+        'swimteam',
+    ];
+    const personType = [
+        'dude',
+        'girl',
+        'gurl',
+        'guy',
+    ];
+    const firstName = name.split(' ')[0];
+    const lastName = name.split(' ')[1];
+
+    let user = firstName.toLowerCase();
+    switch (roll1D(20)) {
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+        const initial = firstName.toLowerCase().charAt(0);
+        user = initial + '.' + lastName.replaceAll('-', '').replaceAll('\'', '').toLowerCase();
+        break;
+    case 11:
+        let circumfix = '';
+        for (let i = 0; i < rollAndSum(2, 2); i++) {
+            if (roll1D(2) == 1) {
+                circumfix += 'x';
+            } else {
+                circumfix += 'X';
+            }
+        }
+        user = circumfix + choose(sports) + choose(personType);
+        if (birthday !== undefined) {
+            user += birthday.getFullYear().toString();
+        }
+        user += reverse(circumfix);
+        return user;
+    default:
+        break;
+    }
+    if (roll1D(6) <= 4) {
+        user += randRange(10, 99);
+    }
+    return `${user}@${choose(domains)}`;
+}
+
+export {generateEmail, generatePhone};

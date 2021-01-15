@@ -91,9 +91,22 @@ function abbreviateAddress(address) {
 }
 
 
+/**
+  * Reverse the given string
+  */
+function reverse(str) {
+    let reversed = '';
+    for (let i = 0; i < str.length; i++) {
+        reversed += str.charAt(str.length - i - 1);
+    }
+    return reversed;
+}
+
+
 export {
     abbreviateAddress,
     abbreviateState,
     getOrdinalSuffix,
+    reverse,
     toTitleCase
 };

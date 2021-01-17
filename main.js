@@ -1,8 +1,7 @@
-import { generateName } from './name.js';
-import { generateAddress } from './place.js';
 import { abbreviateAddress, abbreviateState, toTitleCase } from './strings.js';
-import { generateBirthday, generateEyeColor, generateHeightIn, generatePhoto, generateSex, generateWeightLb } from './person.js';
+import { generatePhoto } from './person.js';
 import { choose, roll1D } from './random.js';
+import {Person} from './nomo.js';
 
 /**
   * Convert a number of inches to feet and inches
@@ -94,34 +93,21 @@ function generateIssuedExpirationDates(birthday) {
   * Generate a new identity
   */
 function generateIdentity() {
-    const name = generateName();
+    const person = Person.randomIdentity();
     const nameEl = document.querySelector('#identity .name');
-    transitionElementText(nameEl, name);
-
-    const address = generateAddress();
-    const streetAddress = abbreviateAddress(address[0]);
-    const city = address[1];
-    const state = address[2];
-    const stateAbbr = abbreviateState(state);
-    const zip = address[3];
-    document.querySelector('#identity h1.state').textContent = state;
-    document.querySelector('#identity .address-1').textContent = streetAddress;
-    document.querySelector('#identity .address-2').textContent = city + ', ' + stateAbbr + ' ' + zip;
-
-    const birthday = generateBirthday();
-    const birthdayStr = birthday.toISOString().substring(0, 10);
-    const age = Math.ceil((new Date() - birthday) / 1000 / 86400 / 365);
+    transitionElementText(nameEl, person.name);
+    const stateAbbr = abbreviateState(person.address.state);
+    document.querySelector('#identity h1.state').textContent = person.address.state;
+    document.querySelector('#identity .address-1').textContent = abbreviateAddress(person.address.streetAddress());
+    document.querySelector('#identity .address-2').textContent = person.address.city + ', ' + stateAbbr + ' ' + person.address.zip;
+    const birthdayStr = person.birthday.toISOString().substring(0, 10);
     document.querySelector('#identity .birthday .value').textContent = birthdayStr;
 
-    const sex = generateSex();
-    const eyes = generateEyeColor();
-    const height = generateHeightIn(sex);
-    const weight = generateWeightLb(sex);
     const dlClass = generateDlClass();
-    document.querySelector('#identity .sex .value').textContent = sex;
-    document.querySelector('#identity .eyes .value').textContent = eyes;
-    document.querySelector('#identity .height .value').textContent = inchesToFeet(height);
-    document.querySelector('#identity .weight .value').textContent = weight;
+    document.querySelector('#identity .sex .value').textContent = person.sex;
+    document.querySelector('#identity .eyes .value').textContent = person.eyeColor;
+    document.querySelector('#identity .height .value').textContent = inchesToFeet(person.height);
+    document.querySelector('#identity .weight .value').textContent = person.weight;
     document.querySelector('#identity .class .value').textContent = dlClass;
 
     const dlDates = generateIssuedExpirationDates();

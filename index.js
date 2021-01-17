@@ -1,9 +1,7 @@
 #!/usr/bin/env node
 import commander from 'commander';
-import * as name from './name.js';
-import * as person from './person.js'
-import * as place from './place.js'
 import * as contact from './contact.js'
+import {Person} from './nomo.js';
 
 const program = commander.program;
 program.version('0.1.0');
@@ -17,11 +15,10 @@ program
 const count = program.count || 1;
 
 for (let i = 0; i < count; i++) {
-    const currName = name.generateName();
-    console.log(currName);
+    const person = Person.randomIdentity();
+    console.log(person.name);
     if (program.address !== undefined) {
-        const addr = place.generateAddress();
-        console.log(`${addr[0]}\n${addr[1]}, ${addr[2]} ${addr[3]}`);
+        console.log(person.address.toString());
     }
     if (program.phone !== undefined) {
         const phone = contact.generatePhone();
@@ -32,8 +29,8 @@ for (let i = 0; i < count; i++) {
         console.log(`(${areaCode}) ${exchangeCode}-${lineNumber}`);
     }
     if (program.email !== undefined) {
-        const birthday = person.generateBirthday();
-        console.log(contact.generateEmail(currName, birthday));
+        const birthday = person.birthday;
+        console.log(contact.generateEmail(person.name, birthday));
     }
     if (i + 1 < count) {
         console.log('------');

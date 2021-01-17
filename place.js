@@ -133,6 +133,59 @@ const stateSuffixes = [
     'sylvania',
 ];
 
+
+/**
+ * An object containing fields representing a street address
+ */
+class Address {
+    /*
+     * Create a new address - all fields will be null if no arguments are passed in
+     */
+    constructor(houseNumber, street, unit, city, state, zip) {
+        if (arguments.length > 0) {
+            this.houseNumber = houseNumber;
+            this.street = street;
+            this.unit = unit;
+            this.city = city;
+            this.state = state;
+            this.zip = zip;
+        } else {
+            this.houseNumber = null;
+            this.street = null;
+            this.unit = null;
+            this.city = null;
+            this.state = null;
+            this.zip = null;
+        }
+    }
+
+    /**
+     * Format the first line of this address
+     */
+    streetAddress() {
+        let addressString = this.houseNumber + ' ' + this.street;
+        if (this.unit) {
+            addressString += ' Apartment ' + this.unit;
+        }
+        return addressString;
+    }
+
+    /**
+     * Put together a string representing this address
+     */
+    toString(oneline) {
+        // Default is to create a multi-line address
+        let separator = '\n';
+        if (oneline === true) {
+            separator = ', ';
+        }
+        let line1 = this.streetAddress();
+        let line2 = this.city + ', ' + this.state + ' ' + this.zip;
+
+        return line1 + separator + line2;
+    }
+}
+
 /**
   * Generate a random city name
   */
@@ -226,10 +279,11 @@ function generateStreetName() {
   */
 function generateAddress() {
     const houseNumber = Math.ceil(Math.random() * 100);
-    let streetAddress = houseNumber + ' ' + generateStreetName();
+    const streetName = generateStreetName();
+    let apartmentNumber = null;
     if (roll1D(10) < 4) {
         // This is an apartment
-        let apartmentNumber = Math.ceil(Math.random() * 1000) + 100;
+        apartmentNumber = Math.ceil(Math.random() * 1000) + 100;
         if (roll1D(4) < 3) {
             const letter = String.fromCharCode(Math.floor(Math.random() * 26) + 65);
             if (roll1D(4) < 3) {
@@ -239,17 +293,18 @@ function generateAddress() {
                 apartmentNumber = Math.ceil(Math.random() * 100) + sep + letter;
             }
         }
-        streetAddress += ' apartment ' + apartmentNumber;
     }
     let city = generateCity();
     let state = generateState();
     let zipCode = Math.floor(Math.random() * 90000) + 10000;
-    return [
-        toTitleCase(streetAddress),
+    return new Address(
+        houseNumber,
+        streetName,
+        apartmentNumber,
         city,
         state,
-        zipCode,
-    ];
+        zipCode
+    );
 }
 
 export {generateAddress};

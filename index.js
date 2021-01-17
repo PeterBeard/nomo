@@ -16,9 +16,13 @@ const count = program.count || 1;
 
 for (let i = 0; i < count; i++) {
     const person = Person.randomIdentity();
-    console.log(person.name);
+    console.log('Name:    ' + person.name);
     if (program.address !== undefined) {
-        console.log(person.address.toString());
+        const addressLines = person.address.toString().split('\n');
+        console.log('Address: ' + addressLines[0]);
+        for (const line of addressLines.slice(1)) {
+            console.log('         ' + line);
+        }
     }
     if (program.phone !== undefined) {
         const phone = contact.generatePhone();
@@ -26,13 +30,13 @@ for (let i = 0; i < count; i++) {
         const areaCode = phone.substr(2, 3);
         const exchangeCode = phone.substr(5, 3);
         const lineNumber = phone.substr(8, 4);
-        console.log(`(${areaCode}) ${exchangeCode}-${lineNumber}`);
+        console.log(`Phone:   (${areaCode}) ${exchangeCode}-${lineNumber}`);
     }
     if (program.email !== undefined) {
         const birthday = person.birthday;
-        console.log(contact.generateEmail(person.name, birthday));
+        console.log('Email:   ' + contact.generateEmail(person.name, birthday));
     }
     if (i + 1 < count) {
-        console.log('------');
+        console.log('-'.repeat(50));
     }
 }

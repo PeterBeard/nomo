@@ -89,6 +89,7 @@ const nouns = [
     'Chandelier',
     'Chardonnay',
     'Cheese',
+    'Compliance',
     'Crayon',
     'Cushion',
     'Divorce',

@@ -4,6 +4,7 @@
 import {generateName} from './name.js';
 import {generateAddress} from './place.js';
 import {generateBirthday, generateEyeColor, generateHeightIn, generateSex, generateWeightLb} from './person.js';
+import {generateEmail, generatePhone} from './contact.js';
 
 /**
  * An object containing personal information (name, address, birthday, etc.)
@@ -54,6 +55,8 @@ class Person {
         const height = generateHeightIn(sex);
         const weight = generateWeightLb(sex);
         const address = generateAddress();
+        const phone = generatePhone();
+        const email = generateEmail(name, birthday);
         return new Person(
             name,
             birthday,
@@ -62,8 +65,8 @@ class Person {
             sex,
             eyeColor,
             address,
-            null,
-            null,
+            phone,
+            email,
         );
     }
 }

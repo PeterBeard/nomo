@@ -1,11 +1,12 @@
 const adjectives = [
     'big',
+    'great',
     'little',
     'nice',
     'sad',
     'small',
     'tiny',
-    'great',
+    'wet',
     /* added from Rachel's list */
     'gentle',
     'lone',
@@ -19,6 +20,7 @@ const comparatives = [
     'outer',
 ];
 const colors = [
+    'amber',
     'blue',
     'cyan',
     'green',
@@ -77,6 +79,7 @@ const nouns = [
     'Basin',
     'Bath',
     'Bird',
+    'Biscuit',
     'Birthday',
     'Blanket',
     'Bleach',
@@ -85,6 +88,7 @@ const nouns = [
     'Bucket',
     'Building',
     'Burger',
+    'Candle',
     'Caption',
     'Chandelier',
     'Chardonnay',
@@ -95,6 +99,7 @@ const nouns = [
     'Divorce',
     'Dripp',
     'Egg',
+    'Feather',
     'Festival',
     'Friendship',
     'Gargle',
@@ -107,6 +112,7 @@ const nouns = [
     'Loaf',
     'Lumber',
     'Opposite',
+    'Passion',
     'Pepper',
     'Pleasant',
     'Prose',

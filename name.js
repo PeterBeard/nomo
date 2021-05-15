@@ -7,6 +7,7 @@ import {toTitleCase} from './strings.js';
 
 const firstNames = [
     'Alan',
+    'Alexander',
     'Aurelia',
     'Barbara',
     'Beatrice',
@@ -25,6 +26,7 @@ const firstNames = [
     'Emmanuel',
     'Evangeline',
     'Furnifold',
+    'Frangelico',
     'Gertrude',
     'Harriet',
     'Haskell',
@@ -47,6 +49,7 @@ const firstNames = [
     'Nathaniel',
     'Nigel',
     'Norton',
+    'Octavia',
     'Oliver',
     'Ramona',
     'Renata',
@@ -67,20 +70,26 @@ const lastNames = [
     'Bumpass',
     'Crambert',
     'Danckwerts',
+    'Diggins',
     'Dumpleton',
     'Dumweiner',
     'Flasterstein',
     'Lerpiss',
+    'Merz',
     'Pepperdyne',
+    'Scroggs',
     'Spreckels',
     'Van der Woops',
 ];
 
 const suffixes = [
     'balls',
+    'barrel',
+    'cock',
     'face',
     'fire',
     'foot',
+    'fruit',
     'gate',
     'hammer',
     'hands',
@@ -90,6 +99,7 @@ const suffixes = [
     'stein',
     'storm',
     'water',
+    'wick',
     'winkle',
     'wood',
     /* added from Rachel's list */

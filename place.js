@@ -79,6 +79,7 @@ const citySuffixes = [
     'ton',
     'town',
     'vale',
+    'view',
     'ville',
 ];
 const cityTypes = [

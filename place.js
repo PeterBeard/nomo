@@ -114,6 +114,12 @@ const placePrefixes = [
     'mount',
     'port',
 ];
+const unitTypes = [
+    'apartment',
+    'building',
+    'living space',
+    'unit',
+];
 const streetTypes = [
     'avenue',
     'boulevard',
@@ -142,10 +148,11 @@ class Address {
     /*
      * Create a new address - all fields will be null if no arguments are passed in
      */
-    constructor(houseNumber, street, unit, city, state, zip) {
+    constructor(houseNumber, street, unitType, unit, city, state, zip) {
         if (arguments.length > 0) {
             this.houseNumber = houseNumber;
             this.street = street;
+            this.unitType = unitType;
             this.unit = unit;
             this.city = city;
             this.state = state;
@@ -153,6 +160,7 @@ class Address {
         } else {
             this.houseNumber = null;
             this.street = null;
+            this.unitType = null;
             this.unit = null;
             this.city = null;
             this.state = null;
@@ -165,8 +173,8 @@ class Address {
      */
     streetAddress() {
         let addressString = this.houseNumber + ' ' + this.street;
-        if (this.unit) {
-            addressString += ' Apartment ' + this.unit;
+        if (this.unitType && this.unit) {
+            addressString += ' ' + toTitleCase(this.unitType) + ' ' + this.unit;
         }
         return addressString;
     }
@@ -281,9 +289,12 @@ function generateStreetName() {
 function generateAddress() {
     const houseNumber = Math.ceil(Math.random() * 100);
     const streetName = generateStreetName();
+    let unitType = null;
     let apartmentNumber = null;
     if (roll1D(10) < 4) {
         // This is an apartment
+        // But what kind of apartment?
+        unitType = choose(unitTypes);
         apartmentNumber = Math.ceil(Math.random() * 1000) + 100;
         if (roll1D(4) < 3) {
             const letter = String.fromCharCode(Math.floor(Math.random() * 26) + 65);
@@ -301,6 +312,7 @@ function generateAddress() {
     return new Address(
         houseNumber,
         streetName,
+        unitType,
         apartmentNumber,
         city,
         state,

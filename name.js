@@ -24,6 +24,7 @@ const firstNames = [
     'Eleanor',
     'Elliott',
     'Emmanuel',
+    'Enid',
     'Evangeline',
     'Furnifold',
     'Frangelico',
@@ -46,6 +47,7 @@ const firstNames = [
     'Melba',
     'Melvin',
     'Nanette',
+    'Narcissa',
     'Nathaniel',
     'Nigel',
     'Norton',
@@ -162,6 +164,7 @@ const prefixes = [
     'Mc',
     'von ',
     'Ó\'',
+    'Saint-',
 ];
 
 /**

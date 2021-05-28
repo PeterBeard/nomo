@@ -1,6 +1,6 @@
 import {choose, roll1D} from './random.js';
 import {firstNames} from './name.js';
-import {adjectives, animals, comparatives, colors, naturalFeatures, nouns} from './words.js';
+import {adjectives, animals, comparatives, colors, naturalFeatures, nouns, trees} from './words.js';
 import {getOrdinalSuffix, toTitleCase} from './strings.js';
 
 /*
@@ -280,13 +280,20 @@ function generateStreetName() {
     if (option < 2) {
         // Use a random number for the street (e.g. 24th st)
         let number = Math.floor(Math.random() * 100);
+        if (roll1D(4) < 4) {
+            // The most common numbers are 2 through 10
+            number = 2 + Math.floor(Math.random() * 8);
+        }
         streetName = number + getOrdinalSuffix(number);
-    } else if (option < 5) {
+    } else if (option < 4) {
         // Name this street after a person
         streetName = choose(firstNames);
-    } else if (option < 8) {
+    } else if (option < 5) {
         // Use a natural feature for this street
         streetName = choose(naturalFeatures);
+    } else if (option < 9) {
+        // Streets named after trees are *very* common
+        streetName = choose(trees);
     } else {
         // Stick with a random noun/adjective
     }

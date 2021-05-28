@@ -275,14 +275,29 @@ function generateState() {
   * Generate a random street name (e.g. "South Bucket Street")
   */
 function generateStreetName() {
-    let streetName = choose(nouns.concat(adjectives)) + ' ' + choose(streetTypes);
-    if (roll1D(10) < 2) {
+    let streetName = choose(nouns.concat(adjectives));
+    const option = roll1D(10);
+    if (option < 2) {
         // Use a random number for the street (e.g. 24th st)
         let number = Math.floor(Math.random() * 100);
-        streetName = number + getOrdinalSuffix(number) + ' ' + choose(streetTypes);
+        streetName = number + getOrdinalSuffix(number);
+    } else if (option < 5) {
+        // Name this street after a person
+        streetName = choose(firstNames);
+    } else if (option < 8) {
+        // Use a natural feature for this street
+        streetName = choose(naturalFeatures);
+    } else {
+        // Stick with a random noun/adjective
     }
+    streetName = streetName + ' ' + choose(streetTypes);
     if (roll1D(4) === 1) {
-        streetName = choose(cardinalDirections) + ' ' + streetName;
+        // Add a direction to the street name
+        if (roll1D(2) === 1) {
+            streetName = choose(cardinalDirections) + ' ' + streetName;
+        } else {
+            streetName = streetName + ' ' + choose(cardinalDirections);
+        }
     }
     return toTitleCase(streetName);
 }

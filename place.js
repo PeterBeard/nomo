@@ -144,6 +144,58 @@ const stateSuffixes = [
     'sota',
     'sylvania',
 ];
+const usStates = [
+    'Alabama',
+    'Alaska',
+    'Arizona',
+    'Arkansas',
+    'California',
+    'Colorado',
+    'Connecticut',
+    'Delaware',
+    'Florida',
+    'Georgia',
+    'Hawaii',
+    'Idaho',
+    'Illinois',
+    'Indiana',
+    'Iowa',
+    'Kansas',
+    'Kentucky',
+    'Louisiana',
+    'Maine',
+    'Maryland',
+    'Massachusetts',
+    'Michigan',
+    'Minnesota',
+    'Mississippi',
+    'Missouri',
+    'Montana',
+    'Nebraska',
+    'Nevada',
+    'New Hampshire',
+    'New Jersey',
+    'New Mexico',
+    'New York',
+    'North Carolina',
+    'North Dakota',
+    'Ohio',
+    'Oklahoma',
+    'Oregon',
+    'Pennsylvania',
+    'Rhode Island',
+    'South Carolina',
+    'South Dakota',
+    'Tennessee',
+    'Texas',
+    'Utah',
+    'Vermont',
+    'Virginia',
+    'Washington',
+    'West Virginia',
+    'Wisconsin',
+    'Wyoming',
+];
 
 
 /**
@@ -263,8 +315,30 @@ function generateCity() {
   * Generate a word that sounds like a US state
   */
 function generateState() {
-    let stateName = choose(nouns.concat(adjectives)) + choose(stateSuffixes);
-    if (roll1D(4) === 1) {
+    // Usually the best way to generate a state name is to modify an existing one
+    let stateName = choose(usStates);
+    let prefix = null;
+    if (stateName.indexOf(' ') >= 0 && stateName.indexOf('R') !== 0) {
+        const parts = stateName.split(' ');
+        prefix = parts[0];
+        stateName = parts[1];
+    }
+    const vowels = 'AEIOU';
+    let consonant = choose(['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y', 'Z'].filter(c => stateName.indexOf(c) !== 0));
+    if (consonant === 'Q') {
+        consonant = 'Qu';
+    }
+    if (vowels.indexOf(stateName.charAt(0)) >= 0) {
+        // If the state name starts with a vowel, prepend the consonant
+        stateName = consonant + stateName;
+    } else {
+        // Otherwise, Replace the initial consonant with the new one
+        stateName = consonant + stateName.substr(1);
+    }
+    if (prefix) {
+        stateName = prefix + ' ' + stateName;
+    } else if (roll1D(10) === 1) {
+        // Add a prefix
         stateName = choose(statePrefixes) + ' ' + stateName;
     }
     return toTitleCase(stateName);

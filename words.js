@@ -78,6 +78,21 @@ const naturalFeatures = [
     'valley',
     'woods',
 ];
+const trees = [
+    'aspen',
+    'birch',
+    'cedar',
+    'cherry',
+    'cypress',
+    'elm',
+    'larch',
+    'maple',
+    'oak',
+    'pine',
+    'poplar',
+    'spruce',
+    'walnut',
+];
 const nouns = [
     'Accent',
     'Accident',
@@ -177,4 +192,4 @@ const nouns = [
     'Wonder',
 ];
 
-export {adjectives, animals, colors, comparatives, naturalFeatures, nouns};
+export {adjectives, animals, colors, comparatives, naturalFeatures, nouns, trees};

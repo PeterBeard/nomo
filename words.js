@@ -71,6 +71,8 @@ const naturalFeatures = [
     'river',
     'rock',
     'springs',
+    'sunrise',
+    'sunset',
     'swamp',
     'tree',
     'valley',

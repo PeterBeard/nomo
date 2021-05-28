@@ -81,10 +81,13 @@ const citySuffixes = [
     'vale',
     'view',
     'ville',
+    'wood',
+    'worth',
 ];
 const cityTypes = [
     'center',
     'city',
+    'corner',
     'crossing',
     'ferry',
     'harbor',
@@ -123,7 +126,9 @@ const unitTypes = [
 const streetTypes = [
     'avenue',
     'boulevard',
+    'circle',
     'crescent',
+    'lane',
     'road',
     'street',
     'way',

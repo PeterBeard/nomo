@@ -1,5 +1,6 @@
 const adjectives = [
     'big',
+    'bland',
     'clumpy',
     'great',
     'hasty',

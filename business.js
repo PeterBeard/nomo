@@ -16,11 +16,14 @@ const jobs = [
     'Administrator',
     'Analyst',
     'Assistant',
+    'Coordinator',
     'Engineer',
+    'Intern',
     'Manager',
+    'Operator',
+    'Specialist',
     'Supervisor',
     'Technician',
-    'Intern',
     'Wrangler',
 ];
 

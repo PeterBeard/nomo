@@ -32,6 +32,7 @@ const firstNames = [
     'Francine',
     'Frangelico',
     'Furnifold',
+    'Georgette',
     'Gertrude',
     'Harriet',
     'Haskell',
@@ -94,6 +95,7 @@ const lastNames = [
 const suffixes = [
     'balls',
     'barrel',
+    'burger',
     'cock',
     'face',
     'fire',
@@ -102,6 +104,7 @@ const suffixes = [
     'gate',
     'hammer',
     'hands',
+    'master',
     'meister',
     'opoulos',
     'ship',

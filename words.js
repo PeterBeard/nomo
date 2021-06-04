@@ -253,6 +253,7 @@ const industries = [
     'Science',
     'Securities',
     'Sightseeing',
+    'Social Media',
     'Sound Recording',
     'Sporting Goods',
     'Telecommunications',

@@ -97,6 +97,52 @@ const trees = [
     'spruce',
     'walnut',
 ];
+const vegetables = [
+    'bean',
+    'beet',
+    'broccoli',
+    'cabbage',
+    'carrot',
+    'cauliflower',
+    'corn',
+    'cucumber',
+    'eggplant',
+    'garlic',
+    'leek',
+    'lettuce',
+    'onion',
+    'parsnip',
+    'pea',
+    'potato',
+    'pumpkin',
+    'radish',
+    'squash',
+    'tomato', // Yes, yes it's technically a berry but come on
+    'turnip',
+    'yam',
+    'zucchini',
+];
+const fruits = [
+    'apple',
+    'banana',
+    'blueberry',
+    'cranberry',
+    'gooseberry',
+    'grape',
+    'grapefruit',
+    'guava',
+    'kiwi',
+    'lemon',
+    'lime',
+    'orange',
+    'peach',
+    'pineapple',
+    'pomegranate',
+    'raspberry',
+    'strawberry',
+    'watermelon',
+];
+const foods = vegetables.concat(fruits);
 const nouns = [
     'Accent',
     'Accident',
@@ -110,7 +156,6 @@ const nouns = [
     'Blanket',
     'Bleach',
     'Bludgeon',
-    'Broccoli',
     'Bucket',
     'Building',
     'Burger',
@@ -157,7 +202,6 @@ const nouns = [
     'Squeak',
     'Stink',
     'Taste',
-    'Tomato',
     'Toothpaste',
     'Trains',
     'Trousers',
@@ -183,7 +227,6 @@ const nouns = [
     'Morning',
     'Night',
     'Ocean',
-    'Peach',
     'Rain',
     'Salt',
     'Shadow',
@@ -266,4 +309,4 @@ const industries = [
     'Water',
 ];
 
-export {adjectives, animals, colors, comparatives, industries, naturalFeatures, nouns, trees};
+export {adjectives, animals, colors, comparatives, industries, naturalFeatures, nouns, trees, fruits, vegetables, foods};

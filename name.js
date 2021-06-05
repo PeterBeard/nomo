@@ -1,5 +1,5 @@
 import {choose, roll1D} from './random.js';
-import {adjectives, nouns} from './words.js';
+import {adjectives, nouns, foods} from './words.js';
 import {toTitleCase} from './strings.js';
 /*
  *  Variables and functions related to generating names for people
@@ -197,7 +197,7 @@ function generateSurname(allowHyphenation) {
         case 7:
         case 8:
         case 9:
-            lastName = toTitleCase(choose(nouns.concat(adjectives)));
+            lastName = toTitleCase(choose(nouns.concat(adjectives, foods)));
             // Sometimes we add a suffix to lastName if it's short
             let suffixChance = 1.0 * (lastName.length > 10 ? 0.0 : 5.0 / lastName.length);
             if (Math.random() < suffixChance) {

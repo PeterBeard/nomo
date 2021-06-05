@@ -1,6 +1,6 @@
 import {choose, roll1D} from './random.js';
 import {firstNames} from './name.js';
-import {adjectives, animals, comparatives, colors, naturalFeatures, nouns, trees} from './words.js';
+import {adjectives, animals, comparatives, colors, naturalFeatures, nouns, trees, foods} from './words.js';
 import {getOrdinalSuffix, toTitleCase} from './strings.js';
 
 /*
@@ -349,7 +349,7 @@ function generateState() {
   * Generate a random street name (e.g. "South Bucket Street")
   */
 function generateStreetName() {
-    let streetName = choose(nouns.concat(adjectives));
+    let streetName = choose(nouns.concat(adjectives, foods));
     const option = roll1D(10);
     if (option < 2) {
         // Use a random number for the street (e.g. 24th st)

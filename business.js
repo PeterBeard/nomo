@@ -1,5 +1,6 @@
-import {industries} from './words.js';
+import {industries, foods} from './words.js';
 import {choose, roll1D} from './random.js';
+import {toTitleCase} from './strings.js';
 
 
 const jobLevels = [
@@ -18,6 +19,7 @@ const jobs = [
     'Assistant',
     'Coordinator',
     'Engineer',
+    'Inspector',
     'Intern',
     'Manager',
     'Operator',
@@ -26,21 +28,38 @@ const jobs = [
     'Technician',
     'Wrangler',
 ];
+const foodJobs = [
+    'Chef',
+    'Farmer',
+    'Stylist',
+    'Inspector',
+    'Sommelier',
+    'Taster',
+];
 
 
 /**
   * Generate a job title
   */
 function generateJobTitle() {
-    if (roll1D(6) > 1) {
-        let jobTitle = choose(industries) + ' ' + choose(jobs);
+    function appendTitle(word, job) {
+        if (job === undefined) {
+            job = choose(jobs)
+        }
+        let jobTitle = toTitleCase(word) + ' ' + job;
         if (roll1D(3) == 1) {
             return choose(jobLevels) + ' ' + jobTitle;
         } else {
             return jobTitle;
         }
-    } else {
+    }
+    switch (roll1D(10)) {
+    case 1:
         return 'Vice President in Charge of ' + choose(industries);
+    case 2:
+        return appendTitle(choose(foods), choose(foodJobs));
+    default:
+        return appendTitle(choose(industries));
     }
 }
 

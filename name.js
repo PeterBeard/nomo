@@ -112,6 +112,7 @@ const suffixes = [
     'storm',
     'water',
     'wick',
+    'wig',
     'winkle',
     'wood',
     /* added from Rachel's list */

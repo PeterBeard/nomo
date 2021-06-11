@@ -52,6 +52,7 @@ const animals = [
     'hedgehog',
     'monkey',
     'owl',
+    'pony',
     'possum',
     'turkey',
     'weasel',

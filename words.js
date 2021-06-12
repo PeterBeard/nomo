@@ -206,6 +206,7 @@ const nouns = [
     'Sofa',
     'Squeak',
     'Stink',
+    'Surprise',
     'Taste',
     'Toothpaste',
     'Trains',

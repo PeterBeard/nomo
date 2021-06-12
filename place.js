@@ -95,6 +95,7 @@ const cityTypes = [
     'junction',
     'manor',
     'park',
+    'surprise',
     'village',
     'vista',
 ];

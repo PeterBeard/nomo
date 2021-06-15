@@ -2,6 +2,7 @@ const adjectives = [
     'big',
     'bland',
     'clumpy',
+    'deep',
     'great',
     'grim',
     'hasty',
@@ -11,7 +12,9 @@ const adjectives = [
     'sad',
     'slippery',
     'small',
+    'strong',
     'tiny',
+    'vile',
     'wet',
     /* added from Rachel's list */
     'gentle',

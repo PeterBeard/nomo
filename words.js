@@ -155,6 +155,7 @@ const foods = [
     'egg',
     'ham',
     'honey',
+    'pickle',
 ].concat(vegetables, fruits);
 const nouns = [
     'Accent',

@@ -186,6 +186,29 @@ const prefixes = [
  * Generate a random surname
  */
 function generateSurname(allowHyphenation) {
+    function nounToName(noun) {
+        let lastName = toTitleCase(noun);
+        // Sometimes we add a suffix to lastName if it's short
+        let suffixChance = 1.0 * (lastName.length > 10 ? 0.0 : 5.0 / lastName.length);
+        if (Math.random() < suffixChance) {
+            // Usually we use a generic suffix
+            let suffix = choose(suffixes);
+            let lastChar = lastName.charAt(lastName.length - 1);
+            if (lastChar === 's') {
+                lastName = lastName.substring(0, lastName.length - 1);
+                lastChar = lastName.charAt(lastName.length - 1);
+            }
+            while (lastChar === suffix.charAt(0)) {
+                suffix = choose(suffixes);
+            }
+            lastName += suffix;
+        }
+        // Prefixes can also be quite good
+        if (roll1D(10) === 1) {
+            lastName = choose(prefixes) + lastName;
+        }
+        return lastName;
+    }
     if (allowHyphenation === undefined) {
         allowHyphenation = true;
     }
@@ -202,26 +225,7 @@ function generateSurname(allowHyphenation) {
         case 7:
         case 8:
         case 9:
-            lastName = toTitleCase(choose(nouns.concat(adjectives, foods)));
-            // Sometimes we add a suffix to lastName if it's short
-            let suffixChance = 1.0 * (lastName.length > 10 ? 0.0 : 5.0 / lastName.length);
-            if (Math.random() < suffixChance) {
-                // Usually we use a generic suffix
-                let suffix = choose(suffixes);
-                let lastChar = lastName.charAt(lastName.length - 1);
-                if (lastChar === 's') {
-                    lastName = lastName.substring(0, lastName.length - 1);
-                    lastChar = lastName.charAt(lastName.length - 1);
-                }
-                while (lastChar === suffix.charAt(0)) {
-                    suffix = choose(suffixes);
-                }
-                lastName += suffix;
-            }
-            // Prefixes can also be quite good
-            if (roll1D(10) === 1) {
-                lastName = choose(prefixes) + lastName;
-            }
+            lastName = nounToName(choose(nouns.concat(adjectives, foods)));
             break;
         case 10:
         default:

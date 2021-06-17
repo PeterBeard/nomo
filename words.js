@@ -10,11 +10,13 @@ const adjectives = [
     'nice',
     'old',
     'sad',
+    'saucy',
     'slippery',
     'small',
     'strong',
     'tiny',
     'vile',
+    'weird',
     'wet',
     /* added from Rachel's list */
     'gentle',

@@ -1,5 +1,5 @@
 import {choose, roll1D} from './random.js';
-import {adjectives, nouns, foods} from './words.js';
+import {adjectives, nouns, fruits, foods} from './words.js';
 import {toTitleCase} from './strings.js';
 /*
  *  Variables and functions related to generating names for people
@@ -215,7 +215,7 @@ function generateSurname(allowHyphenation) {
 
     let lastName = choose(lastNames);
     // Should we use a random noun to make up a name or use the one from the list?
-    switch(roll1D(10)) {
+    switch(roll1D(12)) {
         case 1:
         case 2:
         case 3:
@@ -225,9 +225,13 @@ function generateSurname(allowHyphenation) {
         case 7:
         case 8:
         case 9:
+        case 10:
             lastName = nounToName(choose(nouns.concat(adjectives, foods)));
             break;
-        case 10:
+        case 11:
+            lastName = toTitleCase(choose(fruits) + 'fruit');
+            break;
+        case 12:
         default:
             break;
     }

@@ -70,7 +70,7 @@ function generateEmail(name, birthday) {
     case 9:
     case 10:
         const initial = firstName.toLowerCase().charAt(0);
-        user = initial + '.' + lastName.replaceAll('-', '').replaceAll('\'', '').toLowerCase();
+        user = `${initial}.${lastName.replaceAll('-', '').replaceAll('\'', '').toLowerCase()}`;
         break;
     case 11:
         let circumfix = '';

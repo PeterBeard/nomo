@@ -230,9 +230,9 @@ class Address {
      * Format the first line of this address
      */
     streetAddress() {
-        let addressString = this.houseNumber + ' ' + this.street;
+        let addressString = `${this.houseNumber} ${this.street}`;
         if (this.unitType && this.unit) {
-            addressString += ' ' + toTitleCase(this.unitType) + ' ' + this.unit;
+            addressString = `${addressString} ${toTitleCase(this.unitType)} ${this.unit}`;
         }
         return addressString;
     }
@@ -247,9 +247,9 @@ class Address {
             separator = ', ';
         }
         let line1 = this.streetAddress();
-        let line2 = this.city + ', ' + this.state + ' ' + this.zip;
+        let line2 = `${this.city}, ${this.state} ${this.zip}`;
 
-        return line1 + separator + line2;
+        return `${line1}${separator}${line2}`;
     }
 }
 
@@ -261,7 +261,7 @@ function generateCity() {
     switch(roll1D(12)) {
         case 1:
         case 2:
-            cityName = choose(animals) + ' ' + choose(naturalFeatures);
+            cityName = `${choose(animals)} ${choose(naturalFeatures)}`;
             break;
         case 3:
         case 4:
@@ -269,43 +269,43 @@ function generateCity() {
             if (roll1D(10) < 2) {
                 separator = '';
             }
-            cityName = choose(colors) + separator + choose(animals);
+            cityName = `${choose(colors)}${separator}${choose(animals)}`;
             break;
         case 5:
             if (roll1D(2) < 2) {
-                cityName = choose(firstNames) + '\'s Hope';
+                cityName = `${choose(firstNames)}'s Hope`;
             } else {
-                cityName = 'Saint ' + choose(firstNames);
+                cityName = `Saint ${choose(firstNames)}`;
             }
             break;
         case 6:
         case 7:
         case 8:
             if (roll1D(2) === 1) {
-                cityName = choose(placePrefixes) + ' ' + choose(cityNouns);
+                cityName = `${choose(placePrefixes)} ${choose(cityNouns)}`;
             } else {
-                cityName = choose(cityNouns) + ' ' + choose(naturalFeatures);
+                cityName = `${choose(cityNouns)} ${choose(naturalFeatures)}`;
             }
             if (roll1D(10) < 3) {
-                cityName = choose(directions) + ' ' + cityName;
+                cityName = `${choose(directions)} ${cityName}`;
             }
             break;
         case 9:
             if (roll1D(10) < 3) {
                 // Add a direction to the city name
-                cityName = choose(directions) + ' ' + cityName;
+                cityName = `${choose(directions)} ${cityName}`;
             } else if (roll1D(4) < 3) {
                 // Or add a comparative
-                cityName = choose(comparatives) + ' ' + cityName;
+                cityName = `${choose(comparatives)} ${cityName}`;
             }
             break;
         case 10:
         case 11:
-            cityName = choose(cityNouns) + ' ' + choose(cityTypes);
+            cityName = `${choose(cityNouns)} ${choose(cityTypes)}`;
             break;
         case 12:
         default:
-            cityName = choose(cityNouns) + choose(citySuffixes);
+            cityName = `${choose(cityNouns)}${choose(citySuffixes)}`;
             break;
     }
     return toTitleCase(cityName);
@@ -337,10 +337,10 @@ function generateState() {
         stateName = consonant + stateName.substr(1);
     }
     if (prefix) {
-        stateName = prefix + ' ' + stateName;
+        stateName = `${prefix} ${stateName}`;
     } else if (roll1D(10) === 1) {
         // Add a prefix
-        stateName = choose(statePrefixes) + ' ' + stateName;
+        stateName = `${choose(statePrefixes)} ${stateName}`;
     }
     return toTitleCase(stateName);
 }
@@ -372,13 +372,13 @@ function generateStreetName() {
     } else {
         // Stick with a random noun/adjective
     }
-    streetName = streetName + ' ' + choose(streetTypes);
+    streetName = `${streetName} ${choose(streetTypes)}`;
     if (roll1D(4) === 1) {
         // Add a direction to the street name
         if (roll1D(2) === 1) {
-            streetName = choose(cardinalDirections) + ' ' + streetName;
+            streetName = `${choose(cardinalDirections)} ${streetName}`;
         } else {
-            streetName = streetName + ' ' + choose(cardinalDirections);
+            streetName = `${streetName} ${choose(cardinalDirections)}`;
         }
     }
     return toTitleCase(streetName);
@@ -401,7 +401,7 @@ function generateAddress() {
         if (roll1D(4) < 3) {
             const letter = String.fromCharCode(Math.floor(Math.random() * 26) + 65);
             if (roll1D(4) < 3) {
-                apartmentNumber = letter + '' + Math.ceil(Math.random() * 100);
+                apartmentNumber = `${letter}${Math.ceil(Math.random() * 100)}`;
             } else {
                 const sep = choose(['', ' ']);
                 apartmentNumber = Math.ceil(Math.random() * 100) + sep + letter;

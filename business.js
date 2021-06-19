@@ -46,16 +46,16 @@ function generateJobTitle() {
         if (job === undefined) {
             job = choose(jobs)
         }
-        let jobTitle = toTitleCase(word) + ' ' + job;
+        let jobTitle = `${toTitleCase(word)} ${job}`;
         if (roll1D(3) == 1) {
-            return choose(jobLevels) + ' ' + jobTitle;
+            return `${choose(jobLevels)} ${jobTitle}`;
         } else {
             return jobTitle;
         }
     }
     switch (roll1D(10)) {
     case 1:
-        return 'Vice President in Charge of ' + choose(industries);
+        return `Vice President in Charge of ${choose(industries)}`;
     case 2:
         return appendTitle(choose(foods), choose(foodJobs));
     default:

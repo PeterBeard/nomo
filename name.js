@@ -229,14 +229,14 @@ function generateSurname(allowHyphenation) {
             lastName = nounToName(choose(nouns.concat(adjectives, foods)));
             break;
         case 11:
-            lastName = toTitleCase(choose(fruits) + 'fruit');
+            lastName = toTitleCase(`${choose(fruits)}fruit`);
             break;
         case 12:
         default:
             break;
     }
     if (allowHyphenation && roll1D(10) === 1) {
-        lastName += '-' + generateSurname(false);
+        lastName = `${lastName}-${generateSurname(false)}`;
     }
     return lastName;
 }
@@ -246,7 +246,7 @@ function generateSurname(allowHyphenation) {
  */
 function generateName() {
     let lastName = generateSurname();
-    return choose(firstNames) + ' ' + lastName;
+    return `${choose(firstNames)} ${lastName}`;
 }
 
 export {firstNames, generateName};

@@ -33,18 +33,18 @@ const count = program.count || 1;
 
 for (let i = 0; i < count; i++) {
     const person = Person.randomIdentity();
-    console.log('Name:      ' + person.name);
+    console.log(`Name:      ${person.name}`);
     if (program.birthday !== undefined) {
         const year = person.birthday.getFullYear();
         const month = months[person.birthday.getMonth()];
         const day = person.birthday.getDate();
-        console.log('Birthday:  ' + day + ' ' + month + ' ' + year + ' (age ' + person.age + ')')
+        console.log(`Birthday:  ${day} ${month} ${year} (age ${person.age})`)
     }
     if (program.address !== undefined) {
         const addressLines = person.address.toString().split('\n');
-        console.log('Address:   ' + addressLines[0]);
+        console.log(`Address:   ${addressLines[0]}`);
         for (const line of addressLines.slice(1)) {
-            console.log('           ' + line);
+            console.log(`           ${line}`);
         }
     }
     if (program.phone !== undefined) {
@@ -57,11 +57,11 @@ for (let i = 0; i < count; i++) {
     }
     if (program.email !== undefined) {
         const birthday = person.birthday;
-        console.log('Email:     ' + contact.generateEmail(person.name, birthday));
+        console.log(`Email:     ${contact.generateEmail(person.name, birthday)}`);
     }
     if (program.job !== undefined) {
         const job = person.job;
-        console.log('Job title: ' + job);
+        console.log(`Job title: ${job}`);
     }
     if (i + 1 < count) {
         console.log('-'.repeat(50));

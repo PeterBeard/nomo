@@ -75,6 +75,7 @@ function abbreviateAddress(address) {
         [/\bBoulevard\b/, 'Blvd'],
         [/\bCrescent\b/, 'Cr'],
         [/\bEast\b/, 'E'],
+        [/\bLane\b/, 'Ln'],
         [/\bNorth\b/, 'N'],
         [/\bRoad\b/, 'Rd'],
         [/\bSouth\b/, 'S'],

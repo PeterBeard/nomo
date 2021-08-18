@@ -21,6 +21,7 @@ const jobs = [
     'Engineer',
     'Inspector',
     'Intern',
+    'Jockey',
     'Manager',
     'Operator',
     'Specialist',
@@ -35,6 +36,9 @@ const foodJobs = [
     'Inspector',
     'Sommelier',
     'Taster',
+];
+const nonJobs = [
+    'Urban Explorer',
 ];
 
 

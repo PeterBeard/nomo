@@ -14,6 +14,7 @@ const adjectives = [
     'nice',
     'old',
     'quick',
+    'right',
     'sad',
     'saucy',
     'slippery',
@@ -23,6 +24,7 @@ const adjectives = [
     'vile',
     'weird',
     'wet',
+    'wrong',
     /* added from Rachel's list */
     'gentle',
     'lone',
@@ -262,6 +264,15 @@ const nouns = [
     'Winter',
     'Witch',
     'Wonder',
+];
+const verbs = [
+    'drink',
+    'give',
+    'hold',
+    'kick',
+    'make',
+    'melt',
+    'taste',
 ];
 
 // Industries

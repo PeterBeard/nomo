@@ -344,4 +344,95 @@ const industries = [
     'Water',
 ];
 
-export {adjectives, animals, colors, comparatives, industries, naturalFeatures, nouns, trees, fruits, vegetables, foods};
+
+/*
+Add the given suffix to the given word, matching case
+*/
+function addSuffix(word, suffix) {
+    const lastChar = word.charAt(word.length - 1);
+    if (lastChar.toUpperCase() === lastChar) {
+        return word + suffix.toUpperCase();
+    } else {
+        return word + suffix.toLowerCase();
+    }
+}
+
+
+/*
+Pluralize the given word
+*/
+function pluralize(word) {
+    const irregularNouns = {
+        'belief': 'beliefs',
+        'bus': 'buses',
+        'chef': 'chefs',
+        'chief': 'chiefs',
+        'child': 'children',
+        'foot': 'feet',
+        'goose': 'geese',
+        'halo': 'halos',
+        'man': 'men',
+        'mouse': 'mice',
+        'ox': 'oxen',
+        'person': 'people',
+        'photo': 'photos',
+        'piano': 'pianos',
+        'roof': 'roofs',
+        'tooth': 'teeth',
+        'woman': 'women',
+    };
+    const unchangedNouns = [
+        'deer',
+        'fish',
+        'series',
+        'sheep',
+        'species',
+    ];
+    const vowels = 'aeiou';
+    const lowerWord = word.toLowerCase();
+    if (unchangedNouns.indexOf(lowerWord) !== -1) {
+        // Nouns that are the same for singular and plural
+        return word;
+    } else if (irregularNouns.hasOwnProperty(word.toLowerCase())) {
+        // Irregular plurals
+        return irregularNouns[lowerWord];
+    } else if (lowerWord.endsWith('s') || lowerWord.endsWith('sh') || lowerWord.endsWith('ch') || lowerWord.endsWith('x') || lowerWord.endsWith('z')) {
+        if (vowels.indexOf(lowerWord.charAt(word.length - 2)) !== -1) {
+            if (lowerWord.endsWith('s')) {
+                // "gas" -> "gasses", "bus" -> "busses"
+                return addSuffix(word, 'ses');
+            } else if (lowerWord.endsWith('z')) {
+                // "fez" -> "fezzes"
+                return addSuffix(word, 'zes');
+            } else {
+                // "fox" -> "foxes"
+                return addSuffix(word, 'es');
+            }
+        } else {
+            // "pass" -> "passes", "lash" -> "lashes", "stitch" -> "stitches", "box" -> "boxes", "buzz" -> "buzzes"
+            return addSuffix(word, 'es');
+        }
+    } else if (lowerWord.endsWith('f')) {
+        // "wolf" -> "wolves"
+        return addSuffix(word.substring(0, word.length - 1), 'ves')
+    } else if (lowerWord.endsWith('fe')) {
+        // "wife" -> "wives", "life" -> "lives"
+        return addSuffix(word.substring(0, word.length - 2), 'ves')
+    } else if (lowerWord.endsWith('y')) {
+        if (vowels.indexOf(lowerWord.charAt(word.length - 2)) !== -1) {
+            // Vowel + "y" -> "ys", e.g. "day" -> "days"
+            return addSuffix(word, 's');
+        } else {
+            // "city" -> "cities"
+            return addSuffix(word.substring(0, word.length - 1), 'ies');
+        }
+    } else if (lowerWord.endsWith('o')) {
+        // "potato" -> "potatoes"
+        return addSuffix(word, 'es');
+    } else {
+        // All other words just add "s"
+        return addSuffix(word, 's');
+    }
+}
+
+export {adjectives, animals, colors, comparatives, industries, naturalFeatures, nouns, trees, fruits, vegetables, foods, verbs, pluralize};

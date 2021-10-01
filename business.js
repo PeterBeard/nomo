@@ -1,4 +1,4 @@
-import {industries, foods} from './words.js';
+import {industries, foods, nouns, pluralize} from './words.js';
 import {choose, roll1D} from './random.js';
 import {toTitleCase} from './strings.js';
 
@@ -61,6 +61,8 @@ function generateJobTitle() {
     case 1:
         return `Vice President in Charge of ${choose(industries)}`;
     case 2:
+        return `Vice President in Charge of ${pluralize(choose(nouns))}`;
+    case 3:
         return appendTitle(choose(foods), choose(foodJobs));
     default:
         return appendTitle(choose(industries));

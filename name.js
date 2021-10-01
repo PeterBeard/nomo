@@ -1,5 +1,5 @@
 import {choose, roll1D} from './random.js';
-import {adjectives, nouns, fruits, foods} from './words.js';
+import {adjectives, nouns, verbs, animals, fruits, foods, pluralize} from './words.js';
 import {toTitleCase} from './strings.js';
 /*
  *  Variables and functions related to generating names for people
@@ -247,8 +247,10 @@ function generateSurname(allowHyphenation) {
         case 7:
         case 8:
         case 9:
-        case 10:
             lastName = nounToName(choose(nouns.concat(adjectives, foods)));
+            break;
+        case 10:
+            lastName = toTitleCase(choose(verbs) + choose(animals.concat(foods.concat(fruits))));
             break;
         case 11:
             lastName = toTitleCase(`${choose(fruits)}fruit`);

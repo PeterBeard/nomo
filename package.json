@@ -1,6 +1,6 @@
 {
     "name": "nomo",
-    "version": "0.1.0",
+    "version": "0.4.1",
     "description": "The normal human name generator",
     "main": "bin/index.js",
     "scripts": {

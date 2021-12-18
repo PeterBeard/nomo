@@ -25,6 +25,7 @@ const adjectives = [
     'weird',
     'wet',
     'wrong',
+    'zesty',
     /* added from Rachel's list */
     'gentle',
     'lone',
@@ -58,6 +59,7 @@ const animals = [
     'bird',
     'buffalo',
     'dog',
+    'eel',
     'elk',
     'fox',
     'goose',
@@ -170,6 +172,8 @@ const foods = [
     'ham',
     'honey',
     'pickle',
+    'pimento',
+    'syrup',
 ].concat(vegetables, fruits);
 const nouns = [
     'Accent',
@@ -214,6 +218,7 @@ const nouns = [
     'Loaf',
     'Lumber',
     'Lump',
+    'Nightmare',
     'Opposite',
     'Passion',
     'Pepper',
@@ -235,6 +240,7 @@ const nouns = [
     'Trains',
     'Trousers',
     'Vest',
+    'Vitamin',
     'Volcano',
     'Worm',
     'Weasel',

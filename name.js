@@ -152,6 +152,7 @@ const suffixes = [
     'wick',
     'wig',
     'winkle',
+    'winner',
     'wood',
     /* added from Rachel's list */
     'bell',

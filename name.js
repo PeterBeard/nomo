@@ -1,5 +1,5 @@
 import {choose, roll1D} from './random.js';
-import {adjectives, nouns, verbs, animals, fruits, foods, pluralize} from './words.js';
+import {adjectives, nouns, verbs, animals, fruits, foods, bodyParts, pluralize} from './words.js';
 import {toTitleCase} from './strings.js';
 /*
  *  Variables and functions related to generating names for people
@@ -10,6 +10,8 @@ const firstNames = [
     'Albany',
     'Alexander',
     'Angelica',
+    'Ansel',
+    'Anthea',
     'Aurelia',
     'Barbara',
     'Beatrice',
@@ -17,12 +19,18 @@ const firstNames = [
     'Bengt',
     'Bertrand',
     'Beverly',
+    'Brenda',
+    'Brick',
     'Cameron',
     'Charlotte',
+    'Christine',
+    'Clarence',
     'Clarissa',
     'Cletus',
     'Clifford',
     'Cornelius',
+    'Cuthbert',
+    'Dagmar',
     'Dean',
     'Demetria',
     'Denise',
@@ -34,8 +42,10 @@ const firstNames = [
     'Emmanuel',
     'Enid',
     'Ernestine',
+    'Esmerelda',
     'Eudora',
     'Eunice',
+    'Eustace',
     'Evangeline',
     'Francine',
     'Frangelico',
@@ -57,14 +67,17 @@ const firstNames = [
     'Julia',
     'Kelvin',
     'Lemuel',
+    'Leonard',
     'Leopold',
     'Lionel',
     'Lisa',
+    'Lucien',
     'Lucius',
     'Margot',
     'Marmaduke',
     'Martha',
     'Mavis',
+    'Maxine',
     'Melba',
     'Melvin',
     'Milton',
@@ -77,8 +90,12 @@ const firstNames = [
     'Octavia',
     'Oliver',
     'Pandora',
+    'Partario',
     'Peggy',
+    'Pierpont',
+    'Pierre',
     'Quentin',
+    'Quincy',
     'Ramona',
     'Ranier',
     'Renata',
@@ -88,6 +105,7 @@ const firstNames = [
     'Shelley',
     'Sigmund',
     'Simon',
+    'Skidmore',
     'Stelvio',
     'Stephen',
     'Steve',
@@ -95,6 +113,8 @@ const firstNames = [
     'Timothy',
     'Tobias',
     'Ulysses',
+    'Vivica',
+    'Vivian',
     'Wesley',
     'Woody',
     'Zebulon',
@@ -102,6 +122,7 @@ const firstNames = [
     'Zenobia',
 ];
 const lastNames = [
+    'Bibbleford',
     'Bogler',
     'Bogman',
     'Borkenstein',
@@ -118,6 +139,7 @@ const lastNames = [
     'Leeler',
     'Lerpiss',
     'Merz',
+    'Muncey',
     'Pepperdyne',
     'Scroggs',
     'Spreckels',
@@ -132,12 +154,14 @@ const suffixes = [
     'barrel',
     'bottom',
     'bridge',
+    'bucket',
     'burger',
     'cock',
     'face',
     'fire',
     'foot',
     'fruit',
+    'garden',
     'gate',
     'hammer',
     'hands',
@@ -182,6 +206,7 @@ const suffixes = [
     'mint',
     'mist',
     'moss',
+    'mouth',
     'quake',
     'quest',
     'rock',
@@ -208,6 +233,9 @@ const suffixes = [
     'wing',
     'wish',
     'wolf',
+];
+const lowerPrefixes = [
+    'Fitz',
 ];
 const prefixes = [
     'Ben-',
@@ -241,6 +269,8 @@ function generateSurname(allowHyphenation) {
         // Prefixes can also be quite good
         if (roll1D(10) === 1) {
             lastName = choose(prefixes) + lastName;
+        } else if(roll1D(10) === 1) {
+            lastName = toTitleCase(choose(lowerPrefixes) + lastName);
         }
         return lastName;
     }
@@ -255,6 +285,8 @@ function generateSurname(allowHyphenation) {
         case 2:
         case 3:
         case 4:
+            lastName = toTitleCase(choose(nouns.concat(animals, foods, fruits)) + choose(bodyParts));
+            break;
         case 5:
         case 6:
         case 7:

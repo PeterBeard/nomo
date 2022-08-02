@@ -104,10 +104,28 @@ function reverse(str) {
 }
 
 
+/**
+ * Check to see if a letter is a vowel
+ */
+function isVowel(letter) {
+    return ["a", "e", "i", "o", "u", "w", "y"].indexOf(letter.toLowerCase()) >= 0;
+}
+
+
+/**
+ * Check to see if a letter is a consonant
+ */
+function isConsonant(letter) {
+    return ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "x", "z"].indexOf(letter.toLowerCase()) >= 0;
+}
+
+
 export {
     abbreviateAddress,
     abbreviateState,
     getOrdinalSuffix,
     reverse,
-    toTitleCase
+    toTitleCase,
+    isVowel,
+    isConsonant,
 };

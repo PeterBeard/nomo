@@ -1,3 +1,5 @@
+import {isVowel, isConsonant} from './strings.js';
+
 const bodyParts = [
     'bottom',
     'bum',
@@ -497,4 +499,33 @@ function pluralize(word) {
     }
 }
 
-export {adjectives, animals, bodyParts, colors, comparatives, industries, naturalFeatures, nouns, trees, fruits, vegetables, foods, verbs, pluralize};
+/***
+ * Convert a verb to an agent noun (e.g. walk -> walker)
+ */
+function toAgentNoun(verb) {
+    const doubledConsonants = ["b", "f", "g", "m", "p", "r", "s", "t", "z"];
+
+    function isDoubleConsonant(v) {
+        return isConsonant(v.charAt(v.length - 1)) && isConsonant(v.charAt(verb.length - 2));
+    }
+    function isDoubleVowel(v) {
+        return isVowel(v.charAt(v.length - 2)) && isVowel(v.charAt(v.length - 3));
+    }
+    const lowerVerb = verb.toLowerCase();
+    let suffix = "er";
+    if (verb.charAt(verb.length - 1).toUpperCase() === verb.charAt(verb.length - 1)) {
+        suffix = "ER";
+    }
+
+    if (lowerVerb.endsWith("e")) {
+        // If the last letter is an "e", just add "r"
+        return verb + suffix.substring(1);
+    } else if (doubledConsonants.indexOf(lowerVerb.charAt(verb.length - 1)) >= 0 && !isDoubleConsonant(lowerVerb) && !isDoubleVowel(lowerVerb)){
+        // If the last letter is not a double consonant, double it
+        return verb + verb.charAt(verb.length - 1) + suffix;
+    } else {
+        return verb + suffix;
+    }
+}
+
+export {adjectives, animals, bodyParts, colors, comparatives, industries, naturalFeatures, nouns, trees, fruits, vegetables, foods, verbs, pluralize, toAgentNoun};

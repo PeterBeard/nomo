@@ -1,7 +1,7 @@
 import {choose, roll1D} from './random.js';
 import {firstNames} from './name.js';
 import {adjectives, animals, comparatives, colors, naturalFeatures, nouns, trees, foods} from './words.js';
-import {getOrdinalSuffix, toTitleCase} from './strings.js';
+import {getOrdinalSuffix, toTitleCase, isVowel} from './strings.js';
 
 /*
  *  Variables and functions related to generating place names
@@ -324,12 +324,11 @@ function generateState() {
         prefix = parts[0];
         stateName = parts[1];
     }
-    const vowels = 'AEIOU';
     let consonant = choose(['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y', 'Z'].filter(c => stateName.indexOf(c) !== 0));
     if (consonant === 'Q') {
         consonant = 'Qu';
     }
-    if (vowels.indexOf(stateName.charAt(0)) >= 0) {
+    if (isVowel(stateName.charAt(0))) {
         // If the state name starts with a vowel, prepend the consonant
         stateName = consonant + stateName;
     } else {

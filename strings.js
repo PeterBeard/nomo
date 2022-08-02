@@ -108,7 +108,7 @@ function reverse(str) {
  * Check to see if a letter is a vowel
  */
 function isVowel(letter) {
-    return ["a", "e", "i", "o", "u", "w", "y"].indexOf(letter.toLowerCase()) >= 0;
+    return "aeiou".indexOf(letter.toLowerCase()) >= 0;
 }
 
 
@@ -116,7 +116,7 @@ function isVowel(letter) {
  * Check to see if a letter is a consonant
  */
 function isConsonant(letter) {
-    return ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "x", "z"].indexOf(letter.toLowerCase()) >= 0;
+    return "bcdfghjklmnpqrstvwxyz".indexOf(letter.toLowerCase()) >= 0;
 }
 
 

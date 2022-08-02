@@ -23,7 +23,7 @@ const adjectives = [
     'creepy',
     'deep',
     'early',
-    'exigent',
+    'fancy',
     'future',
     'great',
     'grim',
@@ -193,6 +193,7 @@ const fruits = [
 const foods = [
     'biscuit',
     'burger',
+    'butter',
     'butterscotch',
     'caramel',
     'cheese',
@@ -203,6 +204,7 @@ const foods = [
     'pancake',
     'pickle',
     'pimento',
+    'sausage',
     'syrup',
     'waffle',
     'yogurt',
@@ -316,7 +318,7 @@ const nouns = [
     'Witch',
     'Wonder',
 ];
-const verbs = [
+const transitiveVerbs = [
     'bludgeon',
     'click',
     'draw',
@@ -338,6 +340,11 @@ const verbs = [
     'try',
     'watch',
 ];
+const verbs = transitiveVerbs.concat([
+    'fall',
+    'sit',
+    'stink',
+]);
 
 // Industries
 const industries = [

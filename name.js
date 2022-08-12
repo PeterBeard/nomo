@@ -1,6 +1,6 @@
 import {choose, chooseWeighted, roll1D} from './random.js';
 import {adjectives, nouns, verbs, animals, fruits, foods, bodyParts, naturalFeatures, pluralize, toAgentNoun} from './words.js';
-import {toTitleCase} from './strings.js';
+import {toTitleCase, isVowel} from './strings.js';
 /*
  *  Variables and functions related to generating names for people
  */
@@ -52,6 +52,7 @@ const firstNames = [
     'Furnifold',
     'Gangulphus',
     'Georgette',
+    'Gert',
     'Gertrude',
     'Graham',
     'Harriet',
@@ -280,6 +281,7 @@ function nounToName(noun) {
  * Score a name that comes in two parts (e.g. "Squash" "Cat" -> "Squashcat") (low scores are better)
  */
 function scoreTwoPartName(a, b) {
+    const badLength = 10;
     let score = 0;
     a = a.toLowerCase();
     b = b.toLowerCase();
@@ -289,6 +291,10 @@ function scoreTwoPartName(a, b) {
     }
     // Names where the first part ends in the same letter the second part starts with aren't so good
     if (a.charAt(a.length - 1) === b.charAt(0)) {
+        score += 1;
+    }
+    // Names where one part is very long tend not to work so well
+    if (a.length >= badLength || b.length >= badLength) {
         score += 1;
     }
     return score;
@@ -329,7 +335,7 @@ function generateNounBodyName() {
 /***
  * A single word
  */
-function generateFoodName() {
+function generateNounName() {
     return nounToName(choose(nouns.concat(adjectives, foods)));
 }
 
@@ -379,6 +385,32 @@ function generateNatureName() {
     return toTitleCase(best[0] + toAgentNoun(best[1]));
 }
 
+/***
+ * Generate a name using an article/preposition
+ * - Van der Mattress
+ * - Von Baseball
+ * - de la Watermelon
+ */
+function generateArticleName() {
+    const articles = [
+        'de la',
+        'de',
+        'du',
+        'la',
+        'van den',
+        'van der',
+        'van',
+        'von',
+    ];
+    let article = choose(articles);
+    let word = choose(nouns.concat(foods));
+    if (isVowel(word.charAt(0)) && article.endsWith('la')) {
+        return article.substring(0, article.length - 1) + '\'' + toTitleCase(word);
+    } else {
+        return article + ' ' + toTitleCase(word);
+    }
+}
+
 /**
  * Generate a random surname
  */
@@ -393,18 +425,20 @@ function generateSurname(allowHyphenation) {
         generateFruitName,
         generateVerbNounName,
         generateNounBodyName,
-        generateFoodName,
+        generateNounName,
         generateAdjectiveBodyPartName,
         generateNatureName,
+        generateArticleName,
     ];
     const weights = [
         1,
         2,
         2,
-        5,
-        4,
         6,
+        5,
+        7,
         4,
+        2,
     ];
     const nameGenerator = chooseWeighted(algorithms, weights);
     let lastName = nameGenerator();

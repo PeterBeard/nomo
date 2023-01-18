@@ -235,10 +235,14 @@ class Address {
     /**
      * Format the first line of this address
      */
-    streetAddress() {
+    streetAddress(oneline) {
         let addressString = `${this.houseNumber} ${this.street}`;
         if (this.unitType && this.unit) {
-            addressString = `${addressString} ${toTitleCase(this.unitType)} ${this.unit}`;
+            if (oneline === true) {
+                addressString = `${addressString} ${toTitleCase(this.unitType)} ${this.unit}`;
+            } else {
+                addressString = `${addressString}\n${toTitleCase(this.unitType)} ${this.unit}`;
+            }
         }
         return addressString;
     }
@@ -252,7 +256,7 @@ class Address {
         if (oneline === true) {
             separator = ', ';
         }
-        let line1 = this.streetAddress();
+        let line1 = this.streetAddress(oneline);
         let line2 = `${this.city}, ${this.state} ${this.zip}`;
 
         return `${line1}${separator}${line2}`;

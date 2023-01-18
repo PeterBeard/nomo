@@ -28,7 +28,10 @@ const firstNames = [
     'Clarissa',
     'Cletus',
     'Clifford',
+    'Cloris',
+    'Concordia',
     'Cornelius',
+    'Cressida',
     'Cuthbert',
     'Dagmar',
     'Dean',
@@ -60,6 +63,7 @@ const firstNames = [
     'Helen',
     'Henrietta',
     'Heywood',
+    'Hubert',
     'Hyacinth',
     'Janice',
     'Jean-Jacques',
@@ -129,6 +133,7 @@ const lastNames = [
     'Borkenstein',
     'Bumpass',
     'Chickums',
+    'Claunch',
     'Crambert',
     'Danckwerts',
     'Delgato',
@@ -145,6 +150,7 @@ const lastNames = [
     'Scroggs',
     'Spreckels',
     'Torkelson',
+    'Trevelyan',
     'Urquhart',
     'Van der Woops',
     'Zlatko',
@@ -244,6 +250,10 @@ const prefixes = [
     'von ',
     'Ó\'',
     'Saint-',
+];
+const minerals = [
+    'Alumina',
+    'Zirconia',
 ];
 
 

@@ -398,7 +398,7 @@ function generateStreetName() {
   * Generate a full street address (e.g. 123 Main Street, Anytown, USA 99999)
   */
 function generateAddress() {
-    const houseNumber = Math.ceil(Math.random() * 100);
+    const houseNumber = Math.ceil(10 + Math.random() * 1500);
     const streetName = generateStreetName();
     let unitType = null;
     let apartmentNumber = null;

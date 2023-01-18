@@ -128,10 +128,16 @@ const streetTypes = [
     'avenue',
     'boulevard',
     'circle',
+    'circus',
     'crescent',
     'lane',
+    'parade',
+    'parkway',
+    'place',
     'road',
     'street',
+    'trail',
+    'vista',
     'way',
 ];
 const statePrefixes = cardinalDirections.concat([

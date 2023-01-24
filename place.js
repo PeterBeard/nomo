@@ -67,6 +67,7 @@ const citySuffixes = [
     'croft',
     'dale',
     'falls',
+    'field',
     'foot',
     'ford',
     'hill',
@@ -113,10 +114,18 @@ const directions = cardinalDirections.concat([
     'upper',
 ]);
 const placePrefixes = [
+    'camp',
     'fort',
     'lake',
     'mount',
     'port',
+];
+// "Claudia's Hope", "Lucien's Mistake", etc.
+const possessables = [
+    'Hope',
+    'Mistake',
+    'Ruin',
+    'Vineyard',
 ];
 const unitTypes = [
     'apartment',
@@ -283,7 +292,7 @@ function generateCity() {
             break;
         case 5:
             if (roll1D(2) < 2) {
-                cityName = `${choose(firstNames)}'s Hope`;
+                cityName = `${choose(firstNames)}'s ${choose(possessables)}`;
             } else {
                 cityName = `Saint ${choose(firstNames)}`;
             }
